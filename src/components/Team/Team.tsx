@@ -5,7 +5,7 @@ import type { TeamMember } from '../../types';
 import './Team.css';
 
 /* ── Art discipline icon (SVG inline) ── */
-const artIcons: Record<string, JSX.Element> = {
+const artIcons: Record<string, React.ReactElement> = {
   karthik: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
       <circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9"/>
