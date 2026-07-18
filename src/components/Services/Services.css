@@ -1,0 +1,258 @@
+.services {
+  position: relative;
+  background: #0a0a0a;
+  padding: 8rem 3rem;
+  overflow: hidden;
+}
+
+.services-inner {
+  position: relative;
+  max-width: 1300px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.services-headline {
+  margin-bottom: 4rem;
+}
+
+.services-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: #fff;
+}
+
+.services-title em {
+  color: #F0C040;
+  font-style: italic;
+}
+
+/* Grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.services-grid.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-card {
+  position: relative;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 2.5rem 2rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, #F0C040, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover::before,
+.service-card.expanded::before {
+  transform: scaleX(1);
+}
+
+.service-card:hover,
+.service-card.expanded {
+  background: rgba(240,192,64,0.04);
+  border-color: rgba(240,192,64,0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.service-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.service-icon-wrap {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: invert(1) brightness(0.8);
+  transition: filter 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card:hover .service-icon,
+.service-card.expanded .service-icon {
+  filter: invert(0.8) sepia(1) saturate(3) hue-rotate(5deg) brightness(1);
+}
+
+.service-icon-glow {
+  position: absolute;
+  inset: -5px;
+  background: rgba(240,192,64,0);
+  border-radius: 50%;
+  filter: blur(12px);
+  transition: background 0.4s ease;
+}
+
+.service-card:hover .service-icon-glow,
+.service-card.expanded .service-icon-glow {
+  background: rgba(240,192,64,0.25);
+}
+
+.service-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgba(240,192,64,0.2);
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-num,
+.service-card.expanded .service-num {
+  color: rgba(240,192,64,0.5);
+}
+
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 0.8rem;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-name,
+.service-card.expanded .service-name {
+  color: #F0C040;
+}
+
+.service-desc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.8;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+/* Expandable contact */
+.service-contact-reveal {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.45s ease, opacity 0.3s ease;
+}
+
+.service-contact-reveal.open {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.service-contact-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 1rem 0;
+}
+
+.service-contact-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.4rem;
+}
+
+.service-contact-person {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 0.5rem;
+}
+
+.service-phone {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: #F0C040;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.service-phone:hover { opacity: 0.7; }
+
+.service-toggle {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.4);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-toggle,
+.service-card.expanded .service-toggle {
+  border-color: #F0C040;
+  color: #F0C040;
+  background: rgba(240,192,64,0.1);
+}
+
+/* Background decorative text */
+.services-bg-text {
+  position: absolute;
+  bottom: -2rem;
+  right: -1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.015);
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  z-index: 0;
+  letter-spacing: -0.05em;
+}
+
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .services { padding: 5rem 1.5rem; }
+  .services-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,130 @@
+import type { TeamMember, Film, Service, NavLink } from '../types';
+
+export const navLinks: NavLink[] = [
+  { label: 'Home', href: '#hero' },
+  { label: 'About', href: '#about' },
+  { label: 'Films', href: '#films' },
+  { label: 'Events', href: '#events' },
+  { label: 'Team', href: '#team' },
+  { label: 'Services', href: '#services' },
+  { label: 'Connect', href: '#connect' },
+];
+
+export const films: Film[] = [
+  {
+    id: 'donka',
+    title: 'DONKA?',
+    poster: '/images/donka_poster.png',
+    year: '2023',
+    genre: 'Drama',
+    director: 'Karthik',
+    description: 'When Palm & Paw Resonates — a haunting exploration of connection and solitude.',
+  },
+  {
+    id: 'yakshaikya',
+    title: 'YAKSHAIKYA',
+    poster: '/images/yakshaikya_poster.png',
+    year: '2023',
+    genre: 'Mythology',
+    director: 'Sujith Kalapremi',
+    description: 'A mythological visual journey rooted in ancient stories retold with modern vision.',
+  },
+  {
+    id: 'stories',
+    title: 'STORIES',
+    poster: '/images/stories_poster.png',
+    year: '2023',
+    genre: 'Short Film Anthology',
+    director: 'Janardhan A',
+    description: 'Premiering Aug 31 — A collection of human stories that define our era.',
+  },
+  {
+    id: 'krishne',
+    title: 'KRISHNE',
+    poster: '/images/krishne_poster.png',
+    year: '2024',
+    genre: 'Drama',
+    director: 'Sujith Kalapremi',
+    description: 'A Revelation & The Revolution — concept, produced and directed by Sujith Kalapremi.',
+  },
+  {
+    id: 'life',
+    title: 'LIFE',
+    poster: '/images/life_poster.png',
+    year: '2024',
+    genre: 'Philosophical',
+    director: 'Sujith Kalapremi',
+    description: 'Live. Inspire. Feel. Embrace. — a meditation on the art of living fully.',
+  },
+];
+
+export const teamMembers: TeamMember[] = [
+  {
+    id: 'karthik',
+    name: 'V Karthik',
+    role: 'Cinematographer & Photographer',
+    image: '/images/karthik_team.png',
+    contact: '+91 6361638446',
+  },
+  {
+    id: 'vidya',
+    name: 'Vidhya Varshini',
+    role: 'Creative Director',
+    image: '/images/vidya_team.png',
+  },
+  {
+    id: 'harish',
+    name: 'Harishram',
+    role: 'Actor & Director',
+    image: '/images/harish_team.png',
+  },
+  {
+    id: 'janardhan',
+    name: 'Janardhan A',
+    role: 'Screenwriter & Director',
+    image: '/images/janardhan_team.png',
+  },
+  {
+    id: 'deepika',
+    name: 'Deepika V',
+    role: 'Commission Artist',
+    image: '/images/deepika_team.png',
+    contact: '+91 8904017019',
+  },
+  {
+    id: 'kishan',
+    name: 'Kishan C J',
+    role: 'Sound Designer',
+    image: '/images/kishan_team.png',
+  },
+];
+
+export const services: Service[] = [
+  {
+    id: 'commission',
+    title: 'Commission Art',
+    icon: '/images/commission.png',
+    description: 'Custom artwork crafted with passion. From portraits to abstract compositions, we bring your vision to canvas.',
+    contact: 'Deepika V',
+    contactPerson: 'DEEPIKA V',
+    phone: '+91 8904017019',
+  },
+  {
+    id: 'stipple',
+    title: 'Stipple Art',
+    icon: '/images/stipple.png',
+    description: 'The ancient art of stippling — thousands of dots forming breathtaking imagery with meditative precision.',
+    contact: 'Sujith Kalapremi',
+    contactPerson: 'SUJITH KALAPREMI',
+    phone: '+91 99806 69421',
+  },
+  {
+    id: 'photography',
+    title: 'Photoshoots',
+    icon: '/images/camera.png',
+    description: 'Professional photography capturing moments, emotions, and stories through the lens of artistic vision.',
+    contact: 'V Karthik',
+    contactPerson: 'V KARTHIK',
+    phone: '+91 6361638446',
+  },
+];
