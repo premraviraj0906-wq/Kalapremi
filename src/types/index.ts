@@ -1,7 +1,7 @@
 export interface TeamMember {
   id: string;
   name: string;
-  role: string;
+  roles: string[];
   image: string;
   contact?: string;
 }

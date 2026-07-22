@@ -84,7 +84,7 @@ const Events: React.FC = () => {
           </h2>
 
           <p className="gala-kannada-subtitle">
-            ಶಾಂತೆ ಇಷ್ಟ &nbsp;·&nbsp; <em>Single Eye of the Heart</em>
+            ಶಂತೆ ಇಷ್ಟ &nbsp;·&nbsp; <em>Single Eye of the Heart</em>
           </p>
 
           <p className="gala-lead-text">

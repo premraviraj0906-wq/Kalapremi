@@ -1,6 +1,7 @@
 import React from 'react';
 import { useInView } from '../../hooks';
 import './About.css';
+import { PiFilmReelDuotone, PiMaskHappyDuotone, PiProjectorScreenDuotone } from 'react-icons/pi';
 
 const About: React.FC = () => {
   const { ref: sectionRef, inView } = useInView(0.08);
@@ -8,6 +9,7 @@ const About: React.FC = () => {
   const pillars = [
     {
       num: '01',
+      icon: <PiFilmReelDuotone className="pillar-icon" />,
       title: 'THE ORIGIN',
       headline: 'A Space for Independent Voices',
       description:
@@ -15,6 +17,7 @@ const About: React.FC = () => {
     },
     {
       num: '02',
+      icon: <PiMaskHappyDuotone className="pillar-icon" />,
       title: 'THE SPECTRUM',
       headline: 'Multidisciplinary Creative House',
       description:
@@ -22,6 +25,7 @@ const About: React.FC = () => {
     },
     {
       num: '03',
+      icon: <PiProjectorScreenDuotone className="pillar-icon" />,
       title: 'THE PHILOSOPHY',
       headline: 'Feeling Before Analyzing',
       description:
@@ -30,41 +34,58 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="about-company-section" ref={sectionRef}>
-      {/* Background ambient lighting */}
-      <div className="company-bg-glow" />
-      <div className="company-grid-overlay" />
+    <section id="about" className="editorial-about-section" ref={sectionRef}>
+      {/* Dynamic Background Elements */}
+      <div className="lens-flare-glow" />
+      <div className="editorial-mesh-bg" />
+      
+      {/* Massive Background Watermark */}
+      <div className="watermark-text">VISION</div>
 
-      <div className="about-company-container">
-        {/* Section Header */}
-        <div className={`about-header-block ${inView ? 'visible' : ''}`}>
-          <div className="eyebrow-badge">
-            <span className="badge-dash">—</span>
+      <div className="editorial-container">
+        {/* Cinematic Split Layout: Left (Intro) & Right (Pillars) */}
+        
+        <div className={`editorial-intro ${inView ? 'reveal' : ''}`}>
+          <div className="intro-badge">
+            <span className="badge-dot" />
             <span>ABOUT KALAPREMI PRODUCTIONS</span>
-            <span className="badge-dash">—</span>
           </div>
 
-          <h2 className="about-hero-title">
-            Where Independent <em>Creativity</em> Finds Its Stage.
+          <h2 className="editorial-hero-title">
+            Where Independent <br />
+            <em className="gold-italic">Creativity</em> Finds Its Stage.
           </h2>
 
-          <p className="about-lead-paragraph">
-            We are an independent film house, art collective, and creative platform based in Bangalore.
-            Dedicated to empowering creators, producing original cinema, and bridging diverse artistic forms into powerful human stories.
+          <div className="editorial-divider" />
+
+          <p className="editorial-lead-paragraph">
+            We are an independent film house, art collective, and creative platform based in Bangalore. 
+            Dedicated to empowering creators, producing original cinema, and bridging diverse artistic forms 
+            into powerful human stories.
           </p>
         </div>
 
-        {/* ── COMPANY PILLARS BENTO GRID ── */}
-        <div className={`pillars-bento-grid ${inView ? 'visible' : ''}`}>
+        <div className="editorial-pillars">
           {pillars.map((item, idx) => (
-            <div key={item.num} className="bento-card" style={{ transitionDelay: `${idx * 0.15}s` }}>
-              <div className="bento-card-top">
-                <span className="bento-num">{item.num}</span>
-                <span className="bento-tag">{item.title}</span>
+            <div 
+              key={item.num} 
+              className={`editorial-card ${inView ? 'reveal-card' : ''}`} 
+              style={{ '--card-delay': `${0.3 + idx * 0.2}s` } as React.CSSProperties}
+            >
+              <div className="card-glass-panel">
+                <div className="card-top-row">
+                  <div className="card-icon-wrap">
+                    {item.icon}
+                  </div>
+                  <span className="card-num">{item.num}</span>
+                </div>
+                
+                <h4 className="card-subtitle">{item.title}</h4>
+                <h3 className="card-headline">{item.headline}</h3>
+                <p className="card-description">{item.description}</p>
+                
+                <div className="card-flare-overlay" />
               </div>
-              <h3 className="bento-headline">{item.headline}</h3>
-              <p className="bento-description">{item.description}</p>
-              <div className="bento-corner-glow" />
             </div>
           ))}
         </div>
