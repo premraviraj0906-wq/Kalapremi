@@ -1,169 +1,322 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useMousePosition, useScrollY } from '../../hooks';
+import { useScrollY } from '../../hooks';
 import './Hero.css';
 
-/* ── Poster data ── */
-const POSTERS = [
-  { src: '/images/yakshaikya_poster.png', x: 8,  y: 12, rot: -6,  scale: 0.82 },
-  { src: '/images/krishne_poster.png',    x: 76, y: 8,  rot: 5,   scale: 0.75 },
-  { src: '/images/life_poster.png',       x: 82, y: 55, rot: -4,  scale: 0.88 },
-  { src: '/images/donka_poster.png',      x: 4,  y: 58, rot: 7,   scale: 0.78 },
-  { src: '/images/stories_poster.png',    x: 42, y: 5,  rot: -2,  scale: 0.65 },
-];
+interface ShootingStar {
+  x: number;
+  y: number;
+  length: number;
+  speed: number;
+  alpha: number;
+  width: number;
+}
 
 const Hero: React.FC = () => {
-  const mouse = useMousePosition();
   const scrollY = useScrollY();
   const [ready, setReady] = useState(false);
-  const [titleIn, setTitleIn] = useState(false);
-
-  const particlesRef = useRef(
-    Array.from({ length: 28 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: 20 + Math.random() * 70,
-      size: Math.random() * 2 + 0.5,
-      dur: 6 + Math.random() * 8,
-      delay: Math.random() * 6,
-    }))
-  );
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setReady(true), 100);
-    const t2 = setTimeout(() => setTitleIn(true), 500);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    const t = setTimeout(() => setReady(true), 150);
+    return () => clearTimeout(t);
   }, []);
 
-  const px = (mouse.x / (window.innerWidth  || 1) - 0.5);
-  const py = (mouse.y / (window.innerHeight || 1) - 0.5);
-  const scrollFade = Math.max(0, 1 - scrollY / 600);
+  // Upward Golden Shooting Stars Canvas Effect (Bottom to Top)
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Shooting stars rising from bottom to top
+    const stars: ShootingStar[] = Array.from({ length: 32 }, () => ({
+      x: Math.random() * width,
+      y: height + Math.random() * height * 0.8,
+      length: Math.random() * 32 + 15,
+      speed: Math.random() * 2.4 + 1.2,
+      alpha: Math.random() * 0.45 + 0.15,
+      width: Math.random() * 1.8 + 0.8,
+    }));
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Render upward shooting stars with gold tail trails
+      stars.forEach((star) => {
+        star.y -= star.speed;
+
+        // Reset to bottom when reaching the top
+        if (star.y < -star.length) {
+          star.y = height + Math.random() * 100;
+          star.x = Math.random() * width;
+          star.speed = Math.random() * 2.4 + 1.2;
+        }
+
+        // Draw elongated gold shooting star trail
+        const gradient = ctx.createLinearGradient(star.x, star.y, star.x, star.y + star.length);
+        gradient.addColorStop(0, `rgba(240, 192, 64, ${star.alpha})`);
+        gradient.addColorStop(0.4, `rgba(240, 192, 64, ${star.alpha * 0.5})`);
+        gradient.addColorStop(1, 'rgba(240, 192, 64, 0)');
+
+        ctx.beginPath();
+        ctx.moveTo(star.x, star.y);
+        ctx.lineTo(star.x, star.y + star.length);
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = star.width;
+        ctx.lineCap = 'round';
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = 'rgba(240, 192, 64, 0.6)';
+        ctx.stroke();
+
+        // Star tip point highlight
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.width, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 240, 180, ${star.alpha * 0.9})`;
+        ctx.fill();
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  // Camera Reacts Exclusively to Scroll: Smooth Zooming & Rotation
+  const apertureRotation = scrollY * 0.35;
+  const apertureScale = 1 + (scrollY / 300) * 1.4; // Smooth zoom on scroll
+  const stageOffsetY = Math.min(120, scrollY * 0.3);
+  const scrollFade = Math.max(0, 1 - scrollY / 650);
+
+  // Aperture F-stop markings
+  const fStops = ['f/1.4', 'f/2.0', 'f/2.8', 'f/4.0', 'f/5.6', 'f/8.0', 'f/11', 'f/16'];
 
   return (
-    <section id="hero" className="hero-art" style={{ opacity: scrollFade }}>
+    <section id="hero" className="hero-camera-bg" style={{ opacity: scrollFade }}>
+      {/* ── SHOOTING STARS CANVAS ── */}
+      <canvas ref={canvasRef} className="camera-projector-canvas" />
 
-      {/* ── POSTER FRAGMENTS ── */}
-      <div className="poster-field">
-        {POSTERS.map((p, i) => (
-          <div
-            key={i}
-            className={`poster-frag frag-${i} ${ready ? 'in' : ''}`}
-            style={{
-              left: `${p.x}%`,
-              top:  `${p.y}%`,
-              transform: `
-                rotate(${p.rot + px * 3}deg)
-                scale(${p.scale})
-                translate(${px * (12 + i * 6)}px, ${py * (8 + i * 4)}px)
-              `,
-            }}
-          >
-            <img src={p.src} alt="" />
-            <div className="frag-overlay" />
-          </div>
+      {/* ── CINEMA 35MM CAMERA VIEWFINDER BRACKETS ── */}
+      <div className="camera-viewfinder-hud">
+        <div className="vf-corner-tl" />
+        <div className="vf-corner-tr" />
+        <div className="vf-corner-bl" />
+        <div className="vf-corner-br" />
+        <div className="vf-center-crosshair">
+          <div className="cross-h" />
+          <div className="cross-v" />
+        </div>
+      </div>
+
+      {/* ── ABSTRACT FILM SPROCKET HOLES ── */}
+      <div className="film-sprocket-strip strip-left">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <div key={i} className="sprocket-hole" />
+        ))}
+      </div>
+      <div className="film-sprocket-strip strip-right">
+        {Array.from({ length: 14 }).map((_, i) => (
+          <div key={i} className="sprocket-hole" />
         ))}
       </div>
 
-      {/* ── GRAIN ── */}
-      <div className="hero-grain-art" />
+      {/* ── LIGHTER YET NOTICEABLE CAMERA APERTURE LENS RING ── */}
+      <div
+        className={`camera-aperture-ring lighter-aperture ${ready ? 'in' : ''}`}
+        style={{
+          transform: `translate(-50%, -50%) rotate(${apertureRotation}deg) scale(${apertureScale})`,
+        }}
+      >
+        <svg viewBox="0 0 650 650" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Outer Lens Diameter Ring */}
+          <circle cx="325" cy="325" r="300" stroke="rgba(240, 192, 64, 0.22)" strokeWidth="1.5" strokeDasharray="8 12" />
+          <circle cx="325" cy="325" r="250" stroke="rgba(240, 192, 64, 0.16)" strokeWidth="1.2" />
+          <circle cx="325" cy="325" r="180" stroke="rgba(240, 192, 64, 0.28)" strokeWidth="1.5" />
 
-      {/* ── PARTICLES ── */}
-      <div className="particle-field" aria-hidden="true">
-        {particlesRef.current.map(p => (
-          <span key={p.id} className="p-dot"
-            style={{
-              left: `${p.x}%`,
-              top:  `${p.y}%`,
-              width:  `${p.size}px`,
-              height: `${p.size}px`,
-              animationDuration: `${p.dur}s`,
-              animationDelay:    `${p.delay}s`,
-            }}
-          />
-        ))}
+          {/* Aperture Diaphragm Blades */}
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, idx) => {
+            const rad = (angle * Math.PI) / 180;
+            const x1 = 325 + 180 * Math.cos(rad);
+            const y1 = 325 + 180 * Math.sin(rad);
+            const x2 = 325 + 300 * Math.cos(rad + 0.35);
+            const y2 = 325 + 300 * Math.sin(rad + 0.35);
+            return (
+              <line
+                key={idx}
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
+                stroke="rgba(240, 192, 64, 0.18)"
+                strokeWidth="1.2"
+              />
+            );
+          })}
+
+          {/* F-Stop Markings Placed Direct In-Between Concentric Lines (r = 215) */}
+          {fStops.map((f, i) => {
+            const angleDeg = i * 45 + 22.5; // Offset by 22.5 deg to center neatly between blade lines
+            const rad = (angleDeg * Math.PI) / 180;
+            const textRadius = 215; // Directly in-between r=180 and r=250 concentric circles!
+            const tx = 325 + textRadius * Math.cos(rad);
+            const ty = 325 + textRadius * Math.sin(rad);
+
+            return (
+              <text
+                key={f}
+                x={tx}
+                y={ty}
+                fill="rgba(240, 192, 64, 0.55)"
+                fontSize="11"
+                fontWeight="500"
+                fontFamily="'Space Grotesk', monospace"
+                textAnchor="middle"
+                dominantBaseline="central"
+                className="fstop-svg-text"
+                transform={`rotate(${angleDeg + 90}, ${tx}, ${ty})`}
+              >
+                {f}
+              </text>
+            );
+          })}
+        </svg>
       </div>
 
-      {/* ── MAIN CONTENT ── */}
-      <div className={`hero-stage ${titleIn ? 'in' : ''}`}
-        style={{ transform: `translate(${px * 8}px, ${py * 5}px)` }}>
+      {/* ── CINEMATIC GRAIN ── */}
+      <div className="hero-grain-camera" />
 
-        {/* Micro label */}
-        <p className="hero-micro-label">
-          <span className="ml-dash">—</span>
+      {/* ── MAIN STAGE CONTENT ── */}
+      <div
+        className={`hero-stage-camera ${ready ? 'in' : ''}`}
+        style={{ transform: `translateY(${stageOffsetY}px)` }}
+      >
+        {/* Micro Label */}
+        <p className="camera-eyebrow">
+          <span className="eyebrow-dash">—</span>
           Independent Creative Platform
-          <span className="ml-dash">—</span>
+          <span className="eyebrow-dash">—</span>
         </p>
 
-        {/* ONE LINE TITLE */}
-        <h1 className="hero-headline">
-          <span className="hl-kala">Kala</span><span className="hl-premi">premi</span>
-          <span className="hl-space"> </span>
-          <span className="hl-prod">Productions</span>
+        {/* TWO-LINE TYPOGRAPHY */}
+        <h1 className="camera-headline">
+          <div className="line-kalapremi">
+            <span className="k-yellow">K</span>
+            <span className="rest-white">alapremi</span>
+          </div>
+          <div className="line-productions">
+            <span className="prod-text">PRODUCTIONS</span>
+          </div>
         </h1>
 
-        {/* Ornament */}
-        <div className="title-ornament">
-          <div className="orn-line" />
-          <svg className="orn-diamond" viewBox="0 0 16 16" fill="none">
-            <rect x="8" y="0.5" width="10" height="10" rx="0.5"
+        {/* Golden Diamond Ornament */}
+        <div className="camera-divider">
+          <div className="c-div-line" />
+          <svg className="c-div-diamond" viewBox="0 0 16 16" fill="none">
+            <rect
+              x="8"
+              y="0.5"
+              width="10"
+              height="10"
+              rx="0.5"
               transform="rotate(45 8 8)"
-              fill="none" stroke="#F0C040" strokeWidth="1" />
-            <rect x="8" y="3.5" width="4" height="4" rx="0.2"
+              fill="none"
+              stroke="#F0C040"
+              strokeWidth="1"
+            />
+            <rect
+              x="8"
+              y="3.5"
+              width="4"
+              height="4"
+              rx="0.2"
               transform="rotate(45 8 8)"
-              fill="#F0C040" opacity="0.5" />
+              fill="#F0C040"
+              opacity="0.5"
+            />
           </svg>
-          <div className="orn-line" />
+          <div className="c-div-line" />
         </div>
 
         {/* Tagline */}
-        <p className="hero-tag">
+        <p className="camera-tagline">
           Dance &nbsp;·&nbsp; Cinema &nbsp;·&nbsp; Visual Arts &nbsp;·&nbsp; Storytelling
         </p>
 
-        {/* CTA */}
-        <div className="hero-actions">
-          <button className="btn-art-primary"
-            onClick={() => document.getElementById('films')?.scrollIntoView({ behavior: 'smooth' })}>
+        {/* CTA BUTTONS */}
+        <div className="camera-cta-group">
+          <button
+            className="btn-gold-camera"
+            onClick={() => document.getElementById('films')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             <span>Explore Films</span>
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M2 11L11 2M11 2H5M11 2v6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+              <path d="M2 11L11 2M11 2H5M11 2v6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
             </svg>
           </button>
-          <button className="btn-art-ghost"
-            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
+
+          <button
+            className="btn-ghost-camera"
+            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             Our Story
           </button>
         </div>
       </div>
 
-      {/* ── BOTTOM ROW ── */}
-      <div className={`hero-bottom-row ${titleIn ? 'in' : ''}`}>
-        <div className="hb-stats">
-          {[['5+','Films'],['6','Artists'],['∞','Stories']].map(([n,l]) => (
-            <div key={l} className="hb-stat">
-              <span className="hb-n">{n}</span>
-              <span className="hb-l">{l}</span>
-            </div>
-          ))}
+      {/* ── MINIMAL CAMERA HUD BOTTOM BAR ── */}
+      <div className={`camera-bottom-bar ${ready ? 'in' : ''}`}>
+        <div className="hud-left-info">
+          <span>35MM 4K RAW</span>
+          <span className="hud-sep">•</span>
+          <span>EST. 2022</span>
         </div>
 
-        <button className="scroll-cue"
-          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-          <span className="sc-line" />
-          <span className="sc-text">Scroll</span>
+        {/* Scroll Cue */}
+        <button
+          className="camera-scroll-cue"
+          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+          aria-label="Scroll to About section"
+        >
+          <span className="cue-line-cam" />
+          <span className="cue-text-cam">Scroll</span>
         </button>
 
-        <div className="hb-socials">
-          <a href="https://www.instagram.com/kalapremi.productions/" target="_blank" rel="noreferrer" className="hb-social">Instagram</a>
-          <span className="hb-dot">·</span>
-          <a href="http://www.youtube.com/@KalapremiProductions" target="_blank" rel="noreferrer" className="hb-social">YouTube</a>
+        {/* Social Links */}
+        <div className="hud-right-info">
+          <a
+            href="https://www.instagram.com/kalapremi.productions/"
+            target="_blank"
+            rel="noreferrer"
+            className="social-hud-link"
+          >
+            Instagram
+          </a>
+          <span className="hud-sep">•</span>
+          <a
+            href="http://www.youtube.com/@KalapremiProductions"
+            target="_blank"
+            rel="noreferrer"
+            className="social-hud-link"
+          >
+            YouTube
+          </a>
         </div>
       </div>
-
-      {/* ── YEAR LABEL ── */}
-      <div className={`year-label ${titleIn ? 'in' : ''}`}>
-        <span>EST.</span><span className="yl-year">2022</span>
-      </div>
-
     </section>
   );
 };

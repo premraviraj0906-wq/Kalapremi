@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import CustomCursor from './components/CustomCursor/CustomCursor';
 import Hero from './components/Hero/Hero';
-import About from './components/About/About';
-import Films from './components/Films/Films';
-import Events from './components/Events/Events';
-import Team from './components/Team/Team';
-import Services from './components/Services/Services';
-import Connect from './components/Connect/Connect';
 import FloatingNav from './components/FloatingNav/FloatingNav';
 import './App.css';
+
+// Lazy load components below the fold
+const About = lazy(() => import('./components/About/About'));
+const Films = lazy(() => import('./components/Films/Films'));
+const Events = lazy(() => import('./components/Events/Events'));
+const Team = lazy(() => import('./components/Team/Team'));
+const Services = lazy(() => import('./components/Services/Services'));
+const Connect = lazy(() => import('./components/Connect/Connect'));
 
 const App: React.FC = () => {
   return (
@@ -17,12 +19,14 @@ const App: React.FC = () => {
       <FloatingNav />
       <main>
         <Hero />
-        <About />
-        <Films />
-        <Events />
-        <Team />
-        <Services />
-        <Connect />
+        <Suspense fallback={<div style={{ minHeight: '50vh' }} />}>
+          <About />
+          <Films />
+          <Events />
+          <Team />
+          <Services />
+          <Connect />
+        </Suspense>
       </main>
     </>
   );

@@ -34,7 +34,7 @@ const Services: React.FC = () => {
             >
               <div className="service-card-top">
                 <div className="service-icon-wrap">
-                  <img src={service.icon} alt={service.title} className="service-icon" />
+                  <img src={service.icon} alt={service.title} className="service-icon" loading="lazy" width="64" height="64" />
                   <div className="service-icon-glow" />
                 </div>
                 <div className="service-num">{String(i + 1).padStart(2, '0')}</div>

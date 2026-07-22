@@ -6,6 +6,13 @@ import './Team.css';
 
 /* ── Art discipline icon (SVG inline) ── */
 const artIcons: Record<string, React.ReactElement> = {
+  sujith: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M12 3a9 9 0 0 0 0 18"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  ),
   karthik: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3">
       <circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9"/>
@@ -45,7 +52,7 @@ const artIcons: Record<string, React.ReactElement> = {
 };
 
 /* Gallery tilt per card */
-const tilts = [-2.5, 1.8, -1.2, 2.2, -1.8, 1.4];
+const tilts = [-2.5, 1.8, -1.2, 2.2, -1.8, 1.4, -2.1];
 
 /* ── Single framed art card ── */
 const ArtworkCard: React.FC<{
@@ -59,7 +66,7 @@ const ArtworkCard: React.FC<{
   return (
     <div
       className={`artwork-wrap ${inView ? 'in-view' : ''}`}
-      style={{ '--tilt': `${tilt}deg`, '--delay': `${index * 0.1}s` } as React.CSSProperties}
+      style={{ '--tilt': `${tilt}deg`, '--delay': `${index * 0.08}s` } as React.CSSProperties}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -83,6 +90,8 @@ const ArtworkCard: React.FC<{
                 alt={member.name}
                 className="painting-img"
                 loading="lazy"
+                width="300"
+                height="400"
               />
               {/* Paint texture overlay */}
               <div className="paint-texture" />
@@ -153,7 +162,7 @@ const Team: React.FC = () => {
           <h2 className="gallery-title">
             The <em>Collective</em>
           </h2>
-          <p className="gallery-subtitle">Six artists. One vision. On exhibition.</p>
+          <p className="gallery-subtitle">Seven artists. One vision. On exhibition.</p>
         </div>
         <div className="gallery-header-line" />
       </div>

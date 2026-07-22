@@ -14,6 +14,7 @@ export interface Film {
   genre: string;
   director: string;
   description: string;
+  youtubeId?: string;
 }
 
 export interface Service {

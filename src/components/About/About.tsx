@@ -3,82 +3,72 @@ import { useInView } from '../../hooks';
 import './About.css';
 
 const About: React.FC = () => {
-  const { ref: headRef, inView: headIn } = useInView();
-  const { ref: bioRef, inView: bioIn } = useInView();
-  const { ref: imgRef, inView: imgIn } = useInView();
+  const { ref: sectionRef, inView } = useInView(0.08);
+
+  const pillars = [
+    {
+      num: '01',
+      title: 'THE ORIGIN',
+      headline: 'A Space for Independent Voices',
+      description:
+        'Kalapremi Productions was born out of necessity when independent artists faced limited avenues to showcase original work. What started as a home for our own short films has evolved into a thriving platform standing alongside independent creators across mediums.',
+    },
+    {
+      num: '02',
+      title: 'THE SPECTRUM',
+      headline: 'Multidisciplinary Creative House',
+      description:
+        'We bridge the boundaries between Cinema, Kathak & Contemporary Dance, Visual Stipple Canvas, and Fine Photography — uniting distinct artistic disciplines into a single harmonious platform.',
+    },
+    {
+      num: '03',
+      title: 'THE PHILOSOPHY',
+      headline: 'Feeling Before Analyzing',
+      description:
+        'At our core, we believe in authentic human storytelling, growing together as a collective, and crafting narrative experiences without judgment — making art that resonates deeply.',
+    },
+  ];
 
   return (
-    <section id="about" className="about">
-      <div className="about-inner">
-        {/* Section label */}
-        <div ref={headRef} className={`section-label ${headIn ? 'visible' : ''}`}>
-          <div className="label-line" />
-          <span>About Us</span>
-          <div className="label-line" />
+    <section id="about" className="about-company-section" ref={sectionRef}>
+      {/* Background ambient lighting */}
+      <div className="company-bg-glow" />
+      <div className="company-grid-overlay" />
+
+      <div className="about-company-container">
+        {/* Section Header */}
+        <div className={`about-header-block ${inView ? 'visible' : ''}`}>
+          <div className="eyebrow-badge">
+            <span className="badge-dash">—</span>
+            <span>ABOUT KALAPREMI PRODUCTIONS</span>
+            <span className="badge-dash">—</span>
+          </div>
+
+          <h2 className="about-hero-title">
+            Where Independent <em>Creativity</em> Finds Its Stage.
+          </h2>
+
+          <p className="about-lead-paragraph">
+            We are an independent film house, art collective, and creative platform based in Bangalore.
+            Dedicated to empowering creators, producing original cinema, and bridging diverse artistic forms into powerful human stories.
+          </p>
         </div>
 
-        {/* Split layout */}
-        <div className="about-split">
-          {/* Left: Text */}
-          <div ref={bioRef} className={`about-text ${bioIn ? 'visible' : ''}`}>
-            <h2 className="about-heading">
-              Born from the need for a <em>space</em> where independent voices belong.
-            </h2>
-
-            <div className="about-body">
-              <p>
-                Kalapremi Productions was built out of the need for a platform — when we realized
-                there were limited spaces for independent creators to promote their work. What began
-                as a solution for our own films soon evolved into a collective that stands with
-                creators across mediums.
-              </p>
-              <p>
-                Founded by <strong>Sujith Kalapremi</strong> and supported by a passionate team,
-                Kalapremi Productions not only focuses on short films but brings together talent
-                across a wide range of creative fields.
-              </p>
-              <p>
-                At its core, the production believes in growing together as a stronger team —
-                promoting original storytelling, supporting independent voices, and creating
-                opportunities for artists to share their work with a wider audience.
-              </p>
+        {/* ── COMPANY PILLARS BENTO GRID ── */}
+        <div className={`pillars-bento-grid ${inView ? 'visible' : ''}`}>
+          {pillars.map((item, idx) => (
+            <div key={item.num} className="bento-card" style={{ transitionDelay: `${idx * 0.15}s` }}>
+              <div className="bento-card-top">
+                <span className="bento-num">{item.num}</span>
+                <span className="bento-tag">{item.title}</span>
+              </div>
+              <h3 className="bento-headline">{item.headline}</h3>
+              <p className="bento-description">{item.description}</p>
+              <div className="bento-corner-glow" />
             </div>
-
-            <div className="about-pills">
-              <span className="pill">Dance</span>
-              <span className="pill">Cinema</span>
-              <span className="pill">Visual Arts</span>
-              <span className="pill">Stipple Art</span>
-              <span className="pill">Photography</span>
-            </div>
-          </div>
-
-          {/* Right: Founder image */}
-          <div ref={imgRef} className={`about-image-wrap ${imgIn ? 'visible' : ''}`}>
-            <div className="about-image-frame">
-              <img
-                src="/images/sujith_team.png"
-                alt="Sujith Kalapremi — Founder"
-                className="about-img"
-              />
-              <div className="about-image-overlay" />
-            </div>
-            <div className="about-founder-card">
-              <p className="founder-name">Sujith Kalapremi</p>
-              <p className="founder-role">Founder · Director · Stipple Artist</p>
-              <p className="founder-bio">
-                Multidisciplinary artist working across dance, choreography, filmmaking, and
-                visual arts. Trained in contemporary and Kathak dance, he experiments with
-                bamboo art, glass painting, pop art, and embossed work.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-
-      {/* Decorative lines */}
-      <div className="about-deco-line left" />
-      <div className="about-deco-line right" />
     </section>
   );
 };

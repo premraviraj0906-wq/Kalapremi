@@ -1,205 +1,190 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useInView } from '../../hooks';
-import { PiFilmSlateDuotone, PiEyeDuotone, PiMaskHappyDuotone, PiMapPinDuotone } from 'react-icons/pi';
+import { PiTicketDuotone, PiCalendarBlankDuotone, PiMapPinDuotone, PiArrowRightBold, PiSparkleDuotone, PiFilmStripDuotone, PiPaintBrushDuotone, PiUserCircleGearDuotone } from 'react-icons/pi';
 import './Events.css';
 
-const COUNTDOWN = ['3', '2', '1', '▶'];
+const EVENT_DATE = new Date('2026-08-22T09:00:00+05:30');
+
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+function useEventCountdown(): TimeLeft {
+  const calc = (): TimeLeft => {
+    const diff = EVENT_DATE.getTime() - Date.now();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      days: Math.floor(diff / 86400000),
+      hours: Math.floor((diff / 3600000) % 24),
+      minutes: Math.floor((diff / 60000) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
+    };
+  };
+  const [t, setT] = useState<TimeLeft>(calc);
+  useEffect(() => {
+    const id = setInterval(() => setT(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return t;
+}
 
 const Events: React.FC = () => {
-  const { ref: sectionRef, inView } = useInView(0.15);
-  const [phase, setPhase] = useState<'idle' | 'countdown' | 'playing'>('idle');
-  const [countIdx, setCountIdx] = useState(0);
-  const [projectorOn, setProjectorOn] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { ref: sectionRef, inView } = useInView(0.1);
+  const timeLeft = useEventCountdown();
+  const pad = (n: number) => String(n).padStart(2, '0');
 
-  /* ── Trigger sequence when section enters view ── */
-  useEffect(() => {
-    if (inView && phase === 'idle') {
-      // Small delay then projector flickers on
-      timerRef.current = setTimeout(() => {
-        setProjectorOn(true);
-        setTimeout(() => {
-          setPhase('countdown');
-        }, 700);
-      }, 400);
-    }
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [inView]);
-
-  /* ── Count down frames ── */
-  useEffect(() => {
-    if (phase !== 'countdown') return;
-    if (countIdx < COUNTDOWN.length) {
-      timerRef.current = setTimeout(() => setCountIdx(i => i + 1), 550);
-    } else {
-      setPhase('playing');
-    }
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [phase, countIdx]);
-
-  const playing = phase === 'playing';
+  const highlights = [
+    {
+      num: '01',
+      icon: <PiFilmStripDuotone className="hl-icon" />,
+      title: 'Anthology Premiere',
+      desc: 'Exclusive red-carpet premiere of 5 original Kalapremi short films.',
+    },
+    {
+      num: '02',
+      icon: <PiPaintBrushDuotone className="hl-icon" />,
+      title: 'Stipple & Canvas Exhibit',
+      desc: 'Live stipple art creation and gallery walk of commission artworks.',
+    },
+    {
+      num: '03',
+      icon: <PiSparkleDuotone className="hl-icon" />,
+      title: 'Classical & Modern Dance',
+      desc: 'Live performance blending Kathak & contemporary dance storytelling.',
+    },
+    {
+      num: '04',
+      icon: <PiUserCircleGearDuotone className="hl-icon" />,
+      title: 'Creators Gathering',
+      desc: 'Connecting independent filmmakers, actors, sound designers & artists.',
+    },
+  ];
 
   return (
-    <section id="events" className="theater-section" ref={sectionRef}>
+    <section id="events" className="events-gala-section" ref={sectionRef}>
+      {/* Ambient Cinema Backdrop Lighting */}
+      <div className="gala-spotlight-beam" />
+      <div className="gala-grid-bg" />
+      <div className="gala-particles" />
 
-      {/* ── Ambient dark room ── */}
-      <div className="theater-room" />
-
-      {/* ── Film strips – left and right ── */}
-      <div className="film-strip-side left">
-        {Array.from({ length: 18 }).map((_, i) => (
-          <div key={i} className="side-frame">
-            <img src="/images/shante_ishta_event.jpg" alt="" className="side-thumb" />
+      <div className="gala-container">
+        {/* Section Header */}
+        <div className={`gala-header ${inView ? 'visible' : ''}`}>
+          <div className="gala-eyebrow">
+            <span className="gold-sparkle">✦</span>
+            <span>ANNUAL CREATIVE GALA 2026</span>
+            <span className="gold-sparkle">✦</span>
           </div>
-        ))}
-      </div>
-      <div className="film-strip-side right">
-        {Array.from({ length: 18 }).map((_, i) => (
-          <div key={i} className="side-frame">
-            <img src="/images/shante_ishta_event.jpg" alt="" className="side-thumb" />
-          </div>
-        ))}
-      </div>
 
-      {/* ── Projector beam light ── */}
-      <div className={`projector-origin ${projectorOn ? 'on' : ''}`}>
-        <div className="projector-lens-ring" />
-        <div className="projector-lens-core" />
-        <div className="projector-beam" />
-      </div>
+          <h2 className="gala-main-title">
+            SHANTE <em>ISHTA</em>
+          </h2>
 
-      {/* ── Main cinema screen ── */}
-      <div className="screen-wrap">
+          <p className="gala-kannada-subtitle">
+            ಶಾಂತೆ ಇಷ್ಟ &nbsp;·&nbsp; <em>Single Eye of the Heart</em>
+          </p>
 
-        {/* Screen border / frame */}
-        <div className={`screen-frame ${playing ? 'playing' : ''}`}>
+          <p className="gala-lead-text">
+            Join us for Kalapremi’s flagship gathering celebrating independent cinema, live performance art, and creative human connection in Bangalore.
+          </p>
+        </div>
 
-          {/* CRT scan-line flicker */}
-          <div className="scanlines" />
+        {/* ── 3D GOLDEN TICKET & LIVE COUNTDOWN HERO CARD ── */}
+        <div className={`gala-hero-pass-wrap ${inView ? 'visible' : ''}`}>
+          <div className="gala-ticket-card">
+            <div className="ticket-gold-border" />
+            <div className="ticket-inner-glow" />
 
-          {/* ── COUNTDOWN phase ── */}
-          {phase === 'countdown' && (
-            <div className="countdown-overlay">
-              <div className="count-circle">
-                <svg className="count-ring" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="44"
-                    fill="none" stroke="rgba(240,192,64,0.3)" strokeWidth="1.5"
-                    strokeDasharray="276"
-                    strokeDashoffset={276 - (276 / COUNTDOWN.length) * countIdx}
-                    strokeLinecap="round"
-                    style={{ transition: 'stroke-dashoffset 0.45s ease' }}
-                  />
-                </svg>
-                <span className="count-digit">{COUNTDOWN[countIdx - 1] ?? ''}</span>
+            <div className="ticket-card-header">
+              <div className="t-brand">
+                <span className="t-brand-label">KALAPREMI PRODUCTIONS PRESENTS</span>
+                <h3 className="t-brand-name">Shante<em>Ishta</em> ’26</h3>
               </div>
-              <div className="count-scratches" />
-            </div>
-          )}
-
-          {/* ── EVENT CONTENT (after countdown) ── */}
-          <div className={`screen-content ${playing ? 'reveal' : ''}`}>
-
-            {/* Background event photo */}
-            <div className="screen-photo">
-              <img src="/images/shante_ishta_event.jpg"
-                alt="Shante Ishta gathering" className="screen-photo-img" />
-              <div className="photo-vignette" />
-              <div className="photo-color-grade" />
+              <div className="t-badge">
+                <PiTicketDuotone className="t-icon" />
+                <span>OFFICIAL ADMIT PASS</span>
+              </div>
             </div>
 
-            {/* Centered content */}
-            <div className="screen-text">
-              {/* Eye / heart SVG symbol */}
-              <div className="eye-symbol">
-                <svg viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  {/* Heart shape path as eye lid */}
-                  <path
-                    d="M40 45 C10 30, 2 18, 2 12 C2 6, 7 2, 13 2 C20 2, 28 8, 40 16
-                              C52 8, 60 2, 67 2 C73 2, 78 6, 78 12 C78 18, 70 30, 40 45Z"
-                    fill="none" stroke="#F0C040" strokeWidth="1.2"
-                  />
-                  {/* Iris */}
-                  <circle cx="40" cy="20" r="10" fill="none" stroke="#F0C040" strokeWidth="1" />
-                  {/* Pupil */}
-                  <circle cx="40" cy="20" r="4" fill="#F0C040" opacity="0.6" />
-                  {/* Lashes */}
-                  <line x1="40" y1="2" x2="40" y2="6"  stroke="#F0C040" strokeWidth="1" strokeLinecap="round" />
-                  <line x1="28" y1="5" x2="30" y2="8"  stroke="#F0C040" strokeWidth="1" strokeLinecap="round" />
-                  <line x1="52" y1="5" x2="50" y2="8"  stroke="#F0C040" strokeWidth="1" strokeLinecap="round" />
-                </svg>
-              </div>
-
-              <p className="screen-eyebrow">Annual Cinematic Gathering</p>
-
-              {/* Title with cinematic treatment */}
-              <h2 className="screen-title">
-                <span className="title-line-1">Shante</span>
-                <span className="title-line-2">Ishta</span>
-              </h2>
-
-              {/* Kannada + meaning */}
-              <div className="meaning-row">
-                <div className="meaning-dash" />
-                <div className="meaning-text">
-                  <span className="kannada">ಶಾಂತೆ ಇಷ್ಟ</span>
-                  <span className="translation">Single Eye of the Heart</span>
+            {/* Countdown Grid Inside Ticket */}
+            <div className="ticket-countdown-block">
+              <span className="tc-title">COUNTDOWN TO THE GALA</span>
+              <div className="tc-grid">
+                <div className="tc-unit">
+                  <span className="tc-val">{pad(timeLeft.days)}</span>
+                  <span className="tc-lbl">DAYS</span>
                 </div>
-                <div className="meaning-dash" />
+                <span className="tc-sep">:</span>
+                <div className="tc-unit">
+                  <span className="tc-val">{pad(timeLeft.hours)}</span>
+                  <span className="tc-lbl">HOURS</span>
+                </div>
+                <span className="tc-sep">:</span>
+                <div className="tc-unit">
+                  <span className="tc-val">{pad(timeLeft.minutes)}</span>
+                  <span className="tc-lbl">MINUTES</span>
+                </div>
+                <span className="tc-sep">:</span>
+                <div className="tc-unit">
+                  <span className="tc-val">{pad(timeLeft.seconds)}</span>
+                  <span className="tc-lbl">SECONDS</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* ── Subtitle strip (cinema-style) ── */}
-          <div className={`subtitle-bar ${playing ? 'visible' : ''}`}>
-            <div className="subtitle-scroll">
-              Celebrating Independent Filmmakers &nbsp;·&nbsp; Feeling Before Analyzing &nbsp;·&nbsp; Where Creativity Meets Empathy &nbsp;·&nbsp; Stories Without Judgment &nbsp;·&nbsp; Kalapremi Productions &nbsp;·&nbsp; Celebrating Independent Filmmakers &nbsp;·&nbsp; Feeling Before Analyzing &nbsp;·&nbsp; Where Creativity Meets Empathy &nbsp;·&nbsp; Stories Without Judgment &nbsp;·&nbsp;
+            {/* Event Info & Booking Link */}
+            <div className="ticket-card-footer">
+              <div className="ticket-event-details">
+                <div className="t-detail">
+                  <PiCalendarBlankDuotone className="td-icon" />
+                  <span>August 22, 2026</span>
+                </div>
+                <div className="t-detail">
+                  <PiMapPinDuotone className="td-icon" />
+                  <span>Bengaluru, Karnataka</span>
+                </div>
+              </div>
+
+              <a
+                href="https://www.district.in/events/shante-ishta2026-aug22-2026-buy-tickets"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gala-book-btn"
+                id="shante-ishta-gala-book-now"
+              >
+                <span>RESERVE GALA SEAT</span>
+                <PiArrowRightBold className="btn-arrow" />
+              </a>
             </div>
           </div>
-
-        </div>{/* /screen-frame */}
-
-        {/* Screen curved reflection at bottom */}
-        <div className="screen-reflection" />
-      </div>{/* /screen-wrap */}
-
-      {/* ── Audience silhouettes ── */}
-      <div className={`audience ${playing ? 'visible' : ''}`}>
-        {/* Row 3 (far back, smallest) */}
-        <div className="aud-row row-3">
-          {Array.from({ length: 14 }).map((_, i) => (
-            <div key={i} className="aud-head" style={{ '--h': '22px', '--w': '18px' } as React.CSSProperties} />
-          ))}
         </div>
-        {/* Row 2 */}
-        <div className="aud-row row-2">
-          {Array.from({ length: 11 }).map((_, i) => (
-            <div key={i} className="aud-head" style={{ '--h': '28px', '--w': '22px' } as React.CSSProperties} />
-          ))}
-        </div>
-        {/* Row 1 (front, biggest) */}
-        <div className="aud-row row-1">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="aud-head" style={{ '--h': '36px', '--w': '30px' } as React.CSSProperties} />
-          ))}
-        </div>
-      </div>
 
-      {/* ── Info cards strip below ── */}
-      <div className={`event-info-strip ${playing ? 'visible' : ''}`}>
-        {([
-          { icon: <PiFilmSlateDuotone />,  label: 'FORMAT',     value: 'Short Film Showcase' },
-          { icon: <PiEyeDuotone />,         label: 'PHILOSOPHY', value: 'Feel Before Analyzing' },
-          { icon: <PiMaskHappyDuotone />,   label: 'MISSION',    value: 'Authentic Storytelling' },
-          { icon: <PiMapPinDuotone />,      label: 'PLATFORM',   value: 'Kalapremi Productions' },
-        ] as { icon: React.ReactNode; label: string; value: string }[]).map((item, i) => (
-          <div key={i} className="info-chip" style={{ animationDelay: `${i * 0.12}s` }}>
-            <span className="chip-icon">{item.icon}</span>
-            <span className="chip-label">{item.label}</span>
-            <span className="chip-value">{item.value}</span>
+        {/* ── GALA EXPERIENCE HIGHLIGHTS BENTO GRID ── */}
+        <div className={`gala-bento-section ${inView ? 'visible' : ''}`}>
+          <h3 className="bento-section-title">What to Expect at Shante Ishta</h3>
+
+          <div className="gala-bento-grid">
+            {highlights.map((item, idx) => (
+              <div
+                key={item.num}
+                className="gala-bento-card"
+                style={{ transitionDelay: `${idx * 0.12}s` }}
+              >
+                <div className="bento-card-header">
+                  <span className="bento-card-num">{item.num}</span>
+                  {item.icon}
+                </div>
+                <h4 className="bento-card-title">{item.title}</h4>
+                <p className="bento-card-desc">{item.description || item.desc}</p>
+                <div className="bento-hover-glow" />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-
     </section>
   );
 };

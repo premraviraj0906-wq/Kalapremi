@@ -71,6 +71,12 @@ body {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
+/* Content visibility for off-screen sections */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
 .section-label.visible {
   opacity: 1;
   transform: translateY(0);

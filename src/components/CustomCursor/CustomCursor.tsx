@@ -8,11 +8,21 @@ const CustomCursor: React.FC = () => {
   const { x, y } = useMousePosition();
 
   useEffect(() => {
-    if (dotRef.current) {
-      dotRef.current.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
-    }
-    if (ringRef.current) {
-      ringRef.current.style.transform = `translate(${x - 20}px, ${y - 20}px)`;
+    let ticking = false;
+    const updateCursor = () => {
+      if (dotRef.current && ringRef.current) {
+        dotRef.current.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
+        ringRef.current.style.transform = `translate(${x - 20}px, ${y - 20}px)`;
+      }
+      ticking = false;
+    };
+
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateCursor();
+        ticking = false;
+      });
+      ticking = true;
     }
   }, [x, y]);
 
