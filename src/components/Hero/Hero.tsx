@@ -39,14 +39,14 @@ const Hero: React.FC = () => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Shooting stars rising from bottom to top
-    const stars: ShootingStar[] = Array.from({ length: 32 }, () => ({
+    // Shooting stars rising from bottom to top (Brighter but same low density)
+    const stars: ShootingStar[] = Array.from({ length: 14 }, () => ({
       x: Math.random() * width,
       y: height + Math.random() * height * 0.8,
-      length: Math.random() * 32 + 15,
-      speed: Math.random() * 2.4 + 1.2,
-      alpha: Math.random() * 0.45 + 0.15,
-      width: Math.random() * 1.8 + 0.8,
+      length: Math.random() * 22 + 12,
+      speed: Math.random() * 1.8 + 0.8,
+      alpha: Math.random() * 0.45 + 0.25,
+      width: Math.random() * 1.4 + 0.7,
     }));
 
     const render = () => {
@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
         if (star.y < -star.length) {
           star.y = height + Math.random() * 100;
           star.x = Math.random() * width;
-          star.speed = Math.random() * 2.4 + 1.2;
+          star.speed = Math.random() * 1.8 + 0.8;
         }
 
         // Draw elongated gold shooting star trail
@@ -76,13 +76,13 @@ const Hero: React.FC = () => {
         ctx.lineWidth = star.width;
         ctx.lineCap = 'round';
         ctx.shadowBlur = 8;
-        ctx.shadowColor = 'rgba(240, 192, 64, 0.6)';
+        ctx.shadowColor = 'rgba(240, 192, 64, 0.7)';
         ctx.stroke();
 
         // Star tip point highlight
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.width, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 240, 180, ${star.alpha * 0.9})`;
+        ctx.fillStyle = `rgba(255, 240, 180, ${star.alpha * 0.95})`;
         ctx.fill();
       });
 
