@@ -85,10 +85,11 @@ export const teamMembers: TeamMember[] = [
     image: '/images/vidya_team.png',
   },
   {
-    id: 'harish',
-    name: 'Harishram',
-    roles: ['Actor', 'Director', 'Performer'],
-    image: '/images/harish_team.png',
+    id: 'deepika',
+    name: 'Deepika V',
+    roles: ['Commission Artist', 'Painter', 'Illustrator'],
+    image: '/images/deepika_team.png',
+    contact: '+91 8904017019',
   },
   {
     id: 'janardhan',
@@ -97,11 +98,10 @@ export const teamMembers: TeamMember[] = [
     image: '/images/janardhan_team.png',
   },
   {
-    id: 'deepika',
-    name: 'Deepika V',
-    roles: ['Commission Artist', 'Painter', 'Illustrator'],
-    image: '/images/deepika_team.png',
-    contact: '+91 8904017019',
+    id: 'harish',
+    name: 'Harishram',
+    roles: ['Actor', 'Director', 'Performer'],
+    image: '/images/harish_team.png',
   },
   {
     id: 'kishan',
