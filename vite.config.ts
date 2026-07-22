@@ -7,10 +7,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'animation-vendor': ['gsap', '@gsap/react', 'framer-motion'],
-          'ui-vendor': ['lucide-react', 'react-icons'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react')) return 'react-vendor';
+            if (id.includes('gsap') || id.includes('framer-motion')) return 'animation-vendor';
+            if (id.includes('lucide') || id.includes('react-icons')) return 'ui-vendor';
+            return 'vendor';
+          }
         }
       }
     },

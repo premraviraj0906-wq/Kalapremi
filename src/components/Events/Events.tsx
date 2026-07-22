@@ -178,7 +178,7 @@ const Events: React.FC = () => {
                   {item.icon}
                 </div>
                 <h4 className="bento-card-title">{item.title}</h4>
-                <p className="bento-card-desc">{item.description || item.desc}</p>
+                <p className="bento-card-desc">{item.desc}</p>
                 <div className="bento-hover-glow" />
               </div>
             ))}

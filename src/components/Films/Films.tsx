@@ -16,8 +16,8 @@ const Films: React.FC = () => {
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const stripRef = useRef<HTMLDivElement>(null);
-  const endTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const fadeTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const endTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fadeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { ref: headRef, inView: headIn } = useInView(0.1);
   const { ref: stageRef, inView: stageIn } = useInView(0.1);
