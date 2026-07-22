@@ -237,10 +237,11 @@
   position: absolute;
   bottom: -2rem;
   right: -1rem;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 20rem;
-  font-weight: 700;
-  color: rgba(255,255,255,0.015);
+  font-weight: 800;
+  color: rgba(240, 192, 64, 0.12);
+  text-shadow: 0 0 80px rgba(240, 192, 64, 0.18);
   pointer-events: none;
   user-select: none;
   line-height: 1;

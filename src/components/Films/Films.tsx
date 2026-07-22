@@ -3,12 +3,13 @@ import { films } from '../../data';
 import { useInView } from '../../hooks';
 import type { Film } from '../../types';
 import './Films.css';
+import { PiSpeakerHighDuotone, PiSpeakerSlashDuotone } from 'react-icons/pi';
 
-const GENRES = ['All Productions', 'Drama', 'Mythology', 'Short Film Anthology', 'Philosophical'];
+
 
 const Films: React.FC = () => {
   const [activeFilm, setActiveFilm] = useState<Film>(films[0]);
-  const [selectedGenre, setSelectedGenre] = useState('All Productions');
+
   const [isMuted, setIsMuted] = useState<boolean>(true); // Default muted
   const [isFadingOut, setIsFadingOut] = useState<boolean>(false);
   const [isVideoEnded, setIsVideoEnded] = useState<boolean>(false);
@@ -23,8 +24,7 @@ const Films: React.FC = () => {
   const { ref: stageRef, inView: stageIn } = useInView(0.1);
   const { ref: gridRef, inView: gridIn } = useInView(0.1);
 
-  const filteredFilms =
-    selectedGenre === 'All Productions' ? films : films.filter((f) => f.genre === selectedGenre);
+  const filteredFilms = films;
 
   // Smooth Audio & Video Fade Out Timer (Fades audio & video at 26s, ends at 30s)
   const startVideoTimer = useCallback(() => {
@@ -185,23 +185,11 @@ const Films: React.FC = () => {
             Our <em>Films</em>
           </h2>
           <p className="films-section-subtitle">
-            Original cinema crafted with passion. Teaser auto-plays for 30s (2:00 - 2:30). Click the banner anytime to replay!
+            Original cinema crafted with passion and storytelling excellence. Click any poster below to switch featured preview.
           </p>
         </div>
 
-        {/* ── GENRE FILTER TABS ── */}
-        <div className={`genre-filter-strip ${headIn ? 'visible' : ''}`}>
-          {GENRES.map((genre) => (
-            <button
-              key={genre}
-              className={`genre-tab-btn ${selectedGenre === genre ? 'active' : ''}`}
-              onClick={() => setSelectedGenre(genre)}
-            >
-              <span className="genre-dot" />
-              <span>{genre}</span>
-            </button>
-          ))}
-        </div>
+
 
         {/* ── MAIN CINEMATIC WIDESCREEN STAGE ── */}
         <div ref={stageRef} className={`film-feature-stage ${stageIn ? 'visible' : ''}`}>
@@ -212,7 +200,7 @@ const Films: React.FC = () => {
                 <iframe
                   ref={iframeRef}
                   key={activeFilm.id}
-                  src={`https://www.youtube-nocookie.com/embed/${activeFilm.youtubeId}?autoplay=1&mute=1&start=120&end=150&controls=0&modestbranding=1&rel=0&loop=1&playlist=${activeFilm.youtubeId}&playsinline=1&enablejsapi=1`}
+                  src={`https://www.youtube-nocookie.com/embed/${activeFilm.youtubeId}?autoplay=1&mute=1&start=120&end=150&controls=0&disablekb=1&fs=0&iv_load_policy=3&showinfo=0&rel=0&modestbranding=1&loop=1&playlist=${activeFilm.youtubeId}&playsinline=1&enablejsapi=1`}
                   title={`${activeFilm.title} Background Teaser`}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -237,14 +225,30 @@ const Films: React.FC = () => {
             <div className="feature-projector-beam" />
           </div>
 
-          {/* Sound Toggle Button Top Right (visible during video playback) */}
+          {/* Redesigned Sound Toggle Button Top Right */}
           {!isVideoEnded && (
             <button
-              className="video-audio-toggle"
+              className={`video-audio-toggle ${!isMuted ? 'unmuted' : ''}`}
               onClick={toggleSound}
               title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
+              aria-label={isMuted ? 'Unmute Audio' : 'Mute Audio'}
             >
-              {isMuted ? '🔇 Unmute Audio' : '🔊 Sound On'}
+              {isMuted ? (
+                <>
+                  <PiSpeakerSlashDuotone className="sound-toggle-icon" />
+                  <span className="sound-toggle-label">Muted</span>
+                </>
+              ) : (
+                <>
+                  <PiSpeakerHighDuotone className="sound-toggle-icon" />
+                  <span className="sound-toggle-label">Sound On</span>
+                  <span className="sound-waves">
+                    <span className="wave-bar" />
+                    <span className="wave-bar" />
+                    <span className="wave-bar" />
+                  </span>
+                </>
+              )}
             </button>
           )}
 
@@ -252,7 +256,7 @@ const Films: React.FC = () => {
           <div className="feature-content-box">
             <div className="feature-now-playing">
               <span className="rec-dot-live" />{' '}
-              {isVideoEnded ? 'CLICK BANNER TO REPLAY' : isFadingOut ? 'PAUSED / FADING' : 'NOW PREVIEWING 30s TEASER (2:00 - 2:30)'}
+              {isVideoEnded ? 'CLICK BANNER TO REPLAY' : isFadingOut ? 'PAUSED / FADING' : 'NOW PREVIEWING FEATURE'}
             </div>
 
             <span className="feature-genre-tag">{activeFilm.genre}</span>
@@ -270,11 +274,6 @@ const Films: React.FC = () => {
               <div className="meta-item">
                 <span className="meta-label">RELEASE YEAR</span>
                 <span className="meta-val">{activeFilm.year}</span>
-              </div>
-              <div className="meta-sep">•</div>
-              <div className="meta-item">
-                <span className="meta-label">TEASER RANGE</span>
-                <span className="meta-val">2:00 — 2:30</span>
               </div>
             </div>
 

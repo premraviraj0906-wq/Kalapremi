@@ -187,10 +187,12 @@
 }
 
 .bg-video-iframe {
-  width: 100%;
-  height: 100%;
+  width: 120%;
+  height: 120%;
+  margin-left: -10%;
+  margin-top: -10%;
   border: none;
-  transform: scale(1.4);
+  transform: scale(1.5);
   pointer-events: none;
 }
 
@@ -254,29 +256,76 @@
   pointer-events: none;
 }
 
+/* Modern Glassmorphic Sound Toggle Button */
 .video-audio-toggle {
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
   z-index: 10;
-  background: rgba(8, 7, 5, 0.85);
-  border: 1px solid rgba(240, 192, 64, 0.4);
-  color: #F0C040;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(12, 10, 7, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.75);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.12em;
-  padding: 0.55rem 1.1rem;
+  text-transform: uppercase;
+  padding: 0.55rem 1.2rem;
   border-radius: 100px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .video-audio-toggle:hover {
-  background: #F0C040;
-  color: #0a0804;
+  border-color: rgba(240, 192, 64, 0.6);
+  color: #ffffff;
   transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.video-audio-toggle.unmuted {
+  background: rgba(240, 192, 64, 0.14);
+  border-color: #F0C040;
+  color: #F0C040;
+  box-shadow: 0 0 25px rgba(240, 192, 64, 0.35);
+}
+
+.sound-toggle-icon {
+  font-size: 1.15rem;
+  color: currentColor;
+}
+
+.sound-toggle-label {
+  display: inline-block;
+}
+
+.sound-waves {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+  margin-left: 2px;
+}
+
+.wave-bar {
+  width: 2px;
+  background: #F0C040;
+  border-radius: 1px;
+  animation: soundWave 0.8s ease-in-out infinite alternate;
+}
+
+.wave-bar:nth-child(1) { height: 60%; animation-delay: 0s; }
+.wave-bar:nth-child(2) { height: 100%; animation-delay: 0.2s; }
+.wave-bar:nth-child(3) { height: 40%; animation-delay: 0.4s; }
+
+@keyframes soundWave {
+  0% { height: 25%; }
+  100% { height: 100%; }
 }
 
 .feature-content-box {
