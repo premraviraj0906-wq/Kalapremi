@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { services } from '../../data';
 import { useInView } from '../../hooks';
 import './Services.css';
@@ -162,7 +163,7 @@ const Services: React.FC = () => {
       <div className="cine-bg-text" aria-hidden="true">ACTION</div>
 
       {/* WhatsApp Inquiry Modal */}
-      {modal.isOpen && (
+      {modal.isOpen && createPortal(
         <div className="wa-modal-overlay" onClick={handleCloseModal}>
           <div className="wa-modal-content" onClick={e => e.stopPropagation()}>
             <button className="wa-modal-close" onClick={handleCloseModal}>
@@ -199,7 +200,8 @@ const Services: React.FC = () => {
               </button>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
