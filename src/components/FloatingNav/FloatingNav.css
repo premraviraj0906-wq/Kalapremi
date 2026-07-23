@@ -49,9 +49,14 @@
   filter: drop-shadow(0 0 10px rgba(240, 192, 64, 0.6));
 }
 
-.fn-logo-img {
-  height: 26px;
-  object-fit: contain;
+.fn-logo-k {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #F0C040;
+  line-height: 1;
+  display: block;
 }
 
 .fn-divider {
@@ -130,8 +135,8 @@
     padding: 0.2rem;
   }
 
-  .fn-logo-img {
-    height: 22px;
+  .fn-logo-k {
+    font-size: 1.5rem;
   }
 
   .fn-link {
