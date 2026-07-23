@@ -31,8 +31,6 @@ const CharacterPoster: React.FC<{
 
       {/* Roster Details Layer */}
       <div className="poster-details">
-        <h3 className="poster-name">{member.name}</h3>
-        
         <div className="poster-roles-stack">
           {member.roles.map((role, idx) => (
             <span 
@@ -44,6 +42,8 @@ const CharacterPoster: React.FC<{
             </span>
           ))}
         </div>
+
+        <h3 className="poster-name">{member.name}</h3>
 
         <div className="poster-contact">
           <div className="contact-divider" />

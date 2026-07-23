@@ -384,3 +384,153 @@
   .cine-bg-text { font-size: 10rem; bottom: -1rem; }
   .slate-title { font-size: 3rem; }
 }
+
+/* ── WhatsApp Modal ── */
+.wa-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.wa-modal-content {
+  background: #0a0a0a;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(240, 192, 64, 0.05);
+  transform: translateY(0);
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wa-modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.wa-modal-close:hover {
+  color: #fff;
+}
+
+.wa-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.wa-modal-icon {
+  font-size: 2.5rem;
+  color: #25D366; /* WhatsApp brand color, or keep it yellow #F0C040 */
+  margin-bottom: 1rem;
+}
+
+.wa-modal-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.wa-modal-header p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.wa-modal-header strong {
+  color: #F0C040;
+  font-weight: 600;
+}
+
+.wa-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.wa-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.wa-input-group label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(240, 192, 64, 0.8);
+}
+
+.wa-input-group input,
+.wa-input-group textarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.wa-input-group input:focus,
+.wa-input-group textarea:focus {
+  outline: none;
+  border-color: rgba(240, 192, 64, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.wa-submit-btn {
+  background: #25D366;
+  color: #000;
+  border: none;
+  border-radius: 100px;
+  padding: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.wa-submit-btn:hover {
+  background: #20b858;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+@media (max-width: 480px) {
+  .wa-modal-content {
+    padding: 1.5rem;
+  }
+}

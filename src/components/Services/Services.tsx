@@ -10,7 +10,8 @@ import {
   PiPaintBrushDuotone,
   PiFilmStripDuotone,
   PiBookOpenDuotone,
-  PiWhatsappLogoDuotone
+  PiWhatsappLogoDuotone,
+  PiXBold
 } from 'react-icons/pi';
 
 // Map service IDs to cinematic react-icons
@@ -23,9 +24,44 @@ const serviceIcons: Record<string, React.ReactNode> = {
   'screenwriting': <PiBookOpenDuotone className="svc-cine-icon" />,
 };
 
+interface ModalState {
+  isOpen: boolean;
+  phone: string;
+  serviceTitle: string;
+}
+
 const Services: React.FC = () => {
   const { ref: sectionRef, inView: sectionIn } = useInView(0.1);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  // Modal State
+  const [modal, setModal] = useState<ModalState>({ isOpen: false, phone: '', serviceTitle: '' });
+  const [formData, setFormData] = useState({ name: '', description: '' });
+
+  const handleOpenModal = (e: React.MouseEvent, phone: string, serviceTitle: string) => {
+    e.preventDefault();
+    setModal({ isOpen: true, phone, serviceTitle });
+  };
+
+  const handleCloseModal = () => {
+    setModal({ isOpen: false, phone: '', serviceTitle: '' });
+    setFormData({ name: '', description: '' });
+  };
+
+  const handleSendWhatsApp = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { name, description } = formData;
+    const { phone, serviceTitle } = modal;
+    
+    if (!name.trim()) return;
+
+    const message = `Hello, I am ${name}.\n\nI am interested in exploring a project involving: *${serviceTitle}*.\n\nProject Details:\n${description || 'I would like to discuss further details.'}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+    handleCloseModal();
+  };
 
   return (
     <section id="services" className="services-cinematic" ref={sectionRef}>
@@ -90,15 +126,13 @@ const Services: React.FC = () => {
                         <span className="dir-name">{service.contactPerson}</span>
                       </div>
                       
-                      <a 
-                        href={`https://wa.me/${service.phone}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <button 
+                        onClick={(e) => handleOpenModal(e, service.phone, service.title)}
                         className="action-call"
                       >
                         <PiWhatsappLogoDuotone className="call-icon" />
                         <span>Book Scene</span>
-                      </a>
+                      </button>
                     </div>
                   </div>
 
@@ -115,6 +149,47 @@ const Services: React.FC = () => {
       
       {/* Background Watermark */}
       <div className="cine-bg-text" aria-hidden="true">ACTION</div>
+
+      {/* WhatsApp Inquiry Modal */}
+      {modal.isOpen && (
+        <div className="wa-modal-overlay" onClick={handleCloseModal}>
+          <div className="wa-modal-content" onClick={e => e.stopPropagation()}>
+            <button className="wa-modal-close" onClick={handleCloseModal}>
+              <PiXBold />
+            </button>
+            <div className="wa-modal-header">
+              <PiWhatsappLogoDuotone className="wa-modal-icon" />
+              <h3>Script Your Project</h3>
+              <p>Send a direct message to book <strong>{modal.serviceTitle}</strong>.</p>
+            </div>
+            
+            <form onSubmit={handleSendWhatsApp} className="wa-modal-form">
+              <div className="wa-input-group">
+                <label>Character Name (Your Name)</label>
+                <input 
+                  type="text" 
+                  placeholder="Enter your name..."
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  required 
+                />
+              </div>
+              <div className="wa-input-group">
+                <label>Plot Synopsis (Project Details)</label>
+                <textarea 
+                  placeholder="Briefly describe what you're looking for..."
+                  rows={4}
+                  value={formData.description}
+                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                />
+              </div>
+              <button type="submit" className="wa-submit-btn">
+                Send to WhatsApp
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -88,6 +88,7 @@ export const teamMembers: TeamMember[] = [
       'Bharatnatyam & Kathak Artist',
     ],
     image: '/images/vidya_team.png',
+    contact: '+91 9353515170',
   },
   {
     id: 'deepika',
@@ -107,6 +108,7 @@ export const teamMembers: TeamMember[] = [
     name: 'Harishram',
     roles: ['Actor', 'Director', 'Performer'],
     image: '/images/harish_team.png',
+    contact: '+91 9686937669',
   },
   {
     id: 'kishan',
@@ -120,6 +122,7 @@ export const teamMembers: TeamMember[] = [
       'Visual Designer',
     ],
     image: '/images/kishan_team.png',
+    contact: '+91 7975941898',
   },
 ];
 
