@@ -38,6 +38,17 @@ const Services: React.FC = () => {
   const [modal, setModal] = useState<ModalState>({ isOpen: false, phone: '', serviceTitle: '' });
   const [formData, setFormData] = useState({ name: '', description: '' });
 
+  React.useEffect(() => {
+    if (modal.isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [modal.isOpen]);
+
   const handleOpenModal = (e: React.MouseEvent, phone: string, serviceTitle: string) => {
     e.preventDefault();
     setModal({ isOpen: true, phone, serviceTitle });
