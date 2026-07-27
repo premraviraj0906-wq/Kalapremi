@@ -59,7 +59,7 @@ export const films: Film[] = [
     genre: 'Philosophical',
     director: 'Sujith Kalapremi',
     description: 'Live. Inspire. Feel. Embrace. — a meditation on the art of living fully.',
-    youtubeId: '4Qt0Oa_DAgU',
+    youtubeId: 'LSeMkXQtcQ8',
   },
 ];
 
@@ -105,8 +105,8 @@ export const teamMembers: TeamMember[] = [
   },
   {
     id: 'harish',
-    name: 'Harishram',
-    roles: ['Actor', 'Director', 'Performer'],
+    name: 'Harish Ram',
+    roles: ['Actor', 'Performer', 'Visual Designer'],
     image: '/images/harish_team.png',
     contact: '+91 9686937669',
   },
