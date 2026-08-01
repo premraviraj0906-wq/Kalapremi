@@ -107,7 +107,7 @@ export const teamMembers: TeamMember[] = [
     id: 'harish',
     name: 'Harish Ram',
     roles: ['Actor', 'Performer', 'Visual Designer'],
-    image: '/images/harish_team.png',
+    image: '/images/harish_team.jpg',
     contact: '+91 9686937669',
   },
   {

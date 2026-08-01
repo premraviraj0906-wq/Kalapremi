@@ -223,8 +223,8 @@ const About: React.FC = () => {
 
         // Scroll-based fade in
         const scrollFade = Math.min(1, (progress - p.revealAt) / 0.04);
-        // Breathing pulse
-        const breathe = 0.35 + Math.sin(ts * 0.0008 + p.revealAt * 12) * 0.13;
+        // Breathing pulse (medium-bright backdrop sketch)
+        const breathe = 0.38 + Math.sin(ts * 0.0008 + p.revealAt * 12) * 0.12;
         const alpha = scrollFade * breathe;
 
         // Dance movement offset (only after fully revealed)
@@ -249,7 +249,7 @@ const About: React.FC = () => {
   const pillars = [
     {
       num: '01', title: 'THE ORIGIN',
-      headline: 'A Space for Independent Voices',
+      headline: 'A community for artists built-by artists',
       icon: <PiFilmReelDuotone />,
       description: 'Kalapremi Productions was born out of necessity when independent artists faced limited avenues to showcase original work. What started as a home for our own short films has evolved into a thriving platform standing alongside independent creators across mediums.',
     },
@@ -275,18 +275,22 @@ const About: React.FC = () => {
 
       <div className="minimal-container">
         <div className={`minimal-intro ${inView ? 'reveal' : ''}`}>
-          <div className="minimal-label-wrap">
-            <span className="minimal-label">ABOUT US</span>
-            <div className="minimal-line" />
+          <div className="minimal-intro-left">
+            <div className="minimal-label-wrap">
+              <span className="minimal-label">ABOUT US</span>
+              <div className="minimal-line" />
+            </div>
+            <h2 className="minimal-hero-title">
+              Where <br /><em>Creativity</em> Finds Its Stage.
+            </h2>
           </div>
-          <h2 className="minimal-hero-title">
-            Where Independent <br /><em>Creativity</em> Finds Its Stage.
-          </h2>
-          <p className="minimal-lead-paragraph">
-            We are an independent film house, art collective, and creative platform based in Bangalore.
-            Dedicated to empowering creators, producing original cinema, and bridging diverse artistic forms
-            into powerful human stories.
-          </p>
+          <div className="minimal-intro-right">
+            <p className="minimal-lead-paragraph">
+              We are an independent film house, art collective, and creative platform based in Bangalore.
+              Dedicated to empowering creators, producing original cinema, and bridging diverse artistic forms
+              into powerful human stories.
+            </p>
+          </div>
         </div>
 
         <div className="minimal-pillars">

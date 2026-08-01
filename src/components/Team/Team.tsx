@@ -75,12 +75,7 @@ const Team: React.FC = () => {
 
       {/* Section Header */}
       <div className={`roster-header ${inView ? 'visible' : ''}`}>
-        <div className="roster-slate">
-          <span className="slate-line" />
-          <span className="slate-text">SCENE 04 — KALAPREMI PRODUCTIONS</span>
-          <span className="slate-line" />
-        </div>
-        
+
         <h2 className="roster-title">
           The <em>Cast & Crew</em>
         </h2>

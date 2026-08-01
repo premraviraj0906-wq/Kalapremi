@@ -37,18 +37,20 @@
 
 .connect-heading {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
   font-weight: 300;
   color: #fff;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .connect-heading em {
   color: #F0C040;
   font-style: italic;
   text-shadow: 0 0 40px rgba(240, 192, 64, 0.4);
+  text-transform: none;
 }
 
 .connect-subtext {
@@ -212,71 +214,114 @@
   transform: translate(3px, -3px);
 }
 
-/* Film strip bottom */
-.footer-film-strip {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 0;
-  background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  margin-top: 0;
-}
-
-.footer-perf {
-  width: 14px;
-  height: 8px;
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
-}
-
-/* Endless Marquee Carousel Footer styles */
+/* Film strip bottom and marquee styles combined */
 .connect-marquee-banner {
   position: relative;
   width: 100vw;
   left: 50%;
   transform: translateX(-50%);
-  background: #F0C040;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1.5rem 0;
+  background: #000;
+  border-top: 2px solid #1a1a1a;
+  border-bottom: 2px solid #1a1a1a;
+  padding: 0;
   overflow: hidden;
   margin-top: 4rem;
   margin-bottom: 0;
   z-index: 2;
-  box-shadow: 0 0 50px rgba(240, 192, 64, 0.15);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
 }
 
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 20s linear infinite;
+  animation: marquee-scroll 24s linear infinite;
 }
 
-.marquee-group {
+.marquee-group.film-strip-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  min-width: 520px;
+  background: #080808;
+  border-right: 4px solid #000;
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.05), inset 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.film-frame-top-edge,
+.film-frame-bottom-edge {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 4px 20px;
+  background: #020202;
+  height: 24px;
+  box-sizing: border-box;
+}
+
+.film-frame-top-edge {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.film-frame-bottom-edge {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.perf-hole {
+  width: 12px;
+  height: 8px;
+  background: #000;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.etched-text {
+  font-family: 'Space Grotesk', 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(240, 192, 64, 0.45);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 3px rgba(240, 192, 64, 0.25);
+  user-select: none;
+}
+
+.etched-code {
+  font-family: 'Space Grotesk', 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.1em;
+  user-select: none;
+}
+
+.film-frame-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 2rem;
-  padding-right: 3rem;
+  padding: 1.5rem 3rem;
+  background: linear-gradient(to bottom, #060606, #0b0b0b);
 }
 
 .marquee-logo-title {
   font-family: 'Mythical Prince', 'Cormorant Garamond', serif;
   font-size: 2.8rem;
   font-weight: 600;
-  color: #000;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
 }
 
 .marquee-logo-title .k-yellow {
-  color: #000;
+  color: #F0C040;
 }
 
 .marquee-dot {
   width: 8px;
   height: 8px;
-  background: #000;
+  background: #F0C040;
   border-radius: 50%;
+  box-shadow: 0 0 8px rgba(240, 192, 64, 0.5);
 }
 
 .marquee-subtext {
@@ -284,13 +329,14 @@
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.4em;
-  color: #000;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
 }
 
 .marquee-separator {
   font-size: 1.2rem;
-  color: rgba(0, 0, 0, 0.4);
+  color: #F0C040;
+  text-shadow: 0 0 5px rgba(240, 192, 64, 0.4);
   margin-left: 1.5rem;
 }
 

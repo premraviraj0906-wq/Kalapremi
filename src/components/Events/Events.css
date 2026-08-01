@@ -80,19 +80,20 @@
 
 .gala-main-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.2rem, 7vw, 5.5rem);
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
   font-weight: 300;
   line-height: 1.05;
   color: #ffffff;
   margin: 0 0 0.5rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .gala-main-title em {
   font-style: italic;
-  font-weight: 700;
   color: #F0C040;
   text-shadow: 0 0 40px rgba(240, 192, 64, 0.4);
+  text-transform: none;
 }
 
 .gala-kannada-subtitle {

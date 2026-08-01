@@ -84,16 +84,18 @@ const Services: React.FC = () => {
       <div className="services-inner">
         {/* Cinematic Slate Header */}
         <div className={`cine-header ${sectionIn ? 'visible' : ''}`}>
-          <div className="clapper-top">
-            <div className="chevron-strip"></div>
+          <div className="clapperboard-widget">
+            <div className="clapper-top">
+              <div className="chevron-strip"></div>
+            </div>
+            <div className="slate-board">
+              <span className="slate-label">PRODUCTION CAPABILITIES</span>
+              <h2 className="slate-title">The <em>Studio</em></h2>
+            </div>
           </div>
-          <div className="slate-info">
-            <span className="slate-label">PRODUCTION CAPABILITIES</span>
-            <h2 className="slate-title">The <em>Studio.</em></h2>
-            <p className="slate-desc">
-              From the raw capture of a lens to the final brushstroke of a canvas, our disciplines are united by the art of visual storytelling.
-            </p>
-          </div>
+          <p className="slate-desc">
+            From the raw capture of a lens to the final brushstroke of a canvas, our disciplines are united by the art of visual storytelling.
+          </p>
         </div>
 
         {/* Film Strip Layout */}

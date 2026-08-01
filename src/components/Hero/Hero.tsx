@@ -208,7 +208,7 @@ const Hero: React.FC = () => {
         {/* Micro Label */}
         <p className="camera-eyebrow">
           <span className="eyebrow-dash">—</span>
-          Independent Creative Platform
+          Creative Platform
           <span className="eyebrow-dash">—</span>
         </p>
 
@@ -283,7 +283,7 @@ const Hero: React.FC = () => {
         <div className="hud-left-info">
           <span>35MM 4K RAW</span>
           <span className="hud-sep">•</span>
-          <span>EST. 2022</span>
+          <span>EST. 2023</span>
         </div>
 
         {/* Scroll Cue */}

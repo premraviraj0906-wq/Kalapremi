@@ -46,11 +46,7 @@ const FloatingNav: React.FC = () => {
 
   return (
     <nav className={`floating-nav ${visible ? 'visible' : ''}`} aria-label="Floating Quick Navigation">
-      <button className="fn-logo-btn" onClick={() => nav('#hero')} title="Scroll to Top">
-        <span className="fn-logo-k">K</span>
-      </button>
 
-      <div className="fn-divider" />
 
       <div className="fn-links">
         {navLinks.map(link => {

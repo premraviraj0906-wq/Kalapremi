@@ -57,24 +57,32 @@
   transform: translateY(0);
 }
 
+.clapperboard-widget {
+  width: 320px;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .clapper-top {
-  width: 240px;
-  height: 12px;
+  width: 100%;
+  height: 14px;
   background: #111;
-  margin-bottom: 2rem;
+  margin-bottom: 4px;
   position: relative;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 2px 2px 0 0;
   border: 1px solid rgba(255,255,255,0.1);
   box-shadow: 0 5px 15px rgba(0,0,0,0.5);
   transform-origin: left center;
-  animation: clapper-snap 2s infinite ease-out;
+  animation: clapper-snap 5s infinite ease-in-out;
 }
 
 @keyframes clapper-snap {
-  0%, 80% { transform: rotate(0deg); }
-  90% { transform: rotate(-8deg); }
-  95% { transform: rotate(0deg); }
+  0%, 82% { transform: rotate(0deg); }
+  90% { transform: rotate(-9deg); }
+  94% { transform: rotate(0deg); }
   100% { transform: rotate(0deg); }
 }
 
@@ -94,30 +102,41 @@
   opacity: 0.8;
 }
 
+.slate-board {
+  width: 100%;
+  padding: 1.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 .slate-label {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.3em;
   color: rgba(240, 192, 64, 0.8);
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
+  text-align: center;
 }
 
 .slate-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
   font-weight: 300;
-  line-height: 1;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  line-height: 1.1;
+  margin-bottom: 0;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .slate-title em {
   font-style: italic;
   color: #F0C040;
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 .slate-desc {

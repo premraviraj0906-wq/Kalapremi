@@ -62,18 +62,20 @@
 
 .films-section-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
   font-weight: 300;
   line-height: 1.1;
   color: #ffffff;
   margin: 0 0 1rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .films-section-title em {
   font-style: italic;
-  font-weight: 600;
   color: #F0C040;
   text-shadow: 0 0 30px rgba(240, 192, 64, 0.35);
+  text-transform: none;
 }
 
 .films-section-subtitle {

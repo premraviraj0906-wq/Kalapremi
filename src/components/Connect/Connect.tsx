@@ -101,24 +101,39 @@ const Connect: React.FC = () => {
         </div>
       </div>
 
-      {/* Film strip bottom decoration */}
-      <div className="footer-film-strip">
-        {Array.from({ length: 30 }).map((_, i) => (
-          <div key={i} className="footer-perf" />
-        ))}
-      </div>
-      {/* Endless Marquee Carousel Footer */}
+      {/* Endless Marquee Carousel Footer as a Film Reel Strip */}
       <div className="connect-marquee-banner" aria-hidden="true">
         <div className="marquee-track">
           {/* We repeat the group multiple times to guarantee a seamless wrap with no gaps */}
-          {Array.from({ length: 8 }).map((_, idx) => (
-            <div key={idx} className="marquee-group">
-              <span className="marquee-logo-title">
-                <span className="k-yellow">K</span>alapremi
-              </span>
-              <span className="marquee-dot" />
-              <span className="marquee-subtext">PRODUCTIONS</span>
-              <span className="marquee-separator">★</span>
+          {Array.from({ length: 10 }).map((_, idx) => (
+            <div key={idx} className="marquee-group film-strip-frame">
+              {/* Top Film Edge (Sprockets + Etched Text) */}
+              <div className="film-frame-top-edge">
+                <span className="perf-hole" />
+                <span className="etched-text">KALA PREMI</span>
+                <span className="perf-hole" />
+                <span className="etched-code">KODAK 500T</span>
+                <span className="perf-hole" />
+              </div>
+
+              {/* Main Content */}
+              <div className="film-frame-content">
+                <span className="marquee-logo-title">
+                  <span className="k-yellow">K</span>alapremi
+                </span>
+                <span className="marquee-dot" />
+                <span className="marquee-subtext">PRODUCTIONS</span>
+                <span className="marquee-separator">★</span>
+              </div>
+
+              {/* Bottom Film Edge (Sprockets + Etched Text) */}
+              <div className="film-frame-bottom-edge">
+                <span className="perf-hole" />
+                <span className="etched-text">KALA PREMI</span>
+                <span className="perf-hole" />
+                <span className="etched-code">SAFE.FILM 24FPS</span>
+                <span className="perf-hole" />
+              </div>
             </div>
           ))}
         </div>

@@ -64,16 +64,19 @@
 
 .roster-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.2rem, 5vw, 2.8rem);
   font-weight: 300;
   color: #fff;
   line-height: 1.1;
   margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 
 .roster-title em {
   color: #F0C040;
   font-style: italic;
+  text-transform: none;
 }
 
 .roster-subtitle {
