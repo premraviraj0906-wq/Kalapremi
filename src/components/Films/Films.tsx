@@ -178,7 +178,7 @@ const Films: React.FC = () => {
         <div ref={headRef} className={`films-header ${headIn ? 'visible' : ''}`}>
           <div className="eyebrow-line-wrap">
             <span className="eyebrow-line" />
-            <span className="eyebrow-text">KALAPREMI PRODUCTIONS</span>
+            <span className="eyebrow-text">KALAPREMI <span className="font-montserrat">PRODUCTIONS</span></span>
             <span className="eyebrow-line" />
           </div>
           <h2 className="films-section-title">
@@ -374,7 +374,7 @@ const Films: React.FC = () => {
                   </div>
                   <div className="d-meta-cell">
                     <span className="cell-lbl">HOUSE</span>
-                    <span className="cell-val">Kalapremi Productions</span>
+                    <span className="cell-val">Kalapremi <span className="font-montserrat">Productions</span></span>
                   </div>
                 </div>
 

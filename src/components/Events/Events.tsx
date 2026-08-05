@@ -100,7 +100,7 @@ const Events: React.FC = () => {
 
             <div className="ticket-card-header">
               <div className="t-brand">
-                <span className="t-brand-label">KALAPREMI PRODUCTIONS PRESENTS</span>
+                <span className="t-brand-label">KALAPREMI <span className="font-montserrat">PRODUCTIONS</span> PRESENTS</span>
                 <h3 className="t-brand-name">Shante<em>Ishta</em> ’26</h3>
               </div>
               <div className="t-badge">

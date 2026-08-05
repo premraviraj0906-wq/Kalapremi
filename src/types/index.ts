@@ -3,7 +3,7 @@ export interface TeamMember {
   name: string;
   roles: string[];
   image: string;
-  contact?: string;
+  instagram?: string;
 }
 
 export interface Film {
@@ -24,7 +24,7 @@ export interface Service {
   description: string;
   contact: string;
   contactPerson: string;
-  phone: string;
+  instagram: string;
 }
 
 export interface NavLink {

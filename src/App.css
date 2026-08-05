@@ -114,3 +114,8 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Montserrat Font Utility */
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif !important;
+}

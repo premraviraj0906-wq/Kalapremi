@@ -3,7 +3,7 @@ import { teamMembers } from '../../data';
 import { useInView } from '../../hooks';
 import type { TeamMember } from '../../types';
 import './Team.css';
-import { PiPhoneCallDuotone, PiEnvelopeDuotone } from 'react-icons/pi';
+import { PiInstagramLogoDuotone, PiUserDuotone } from 'react-icons/pi';
 
 const CharacterPoster: React.FC<{
   member: TeamMember;
@@ -47,14 +47,14 @@ const CharacterPoster: React.FC<{
 
         <div className="poster-contact">
           <div className="contact-divider" />
-          {member.contact ? (
-            <a href={`tel:${member.contact}`} className="contact-link">
-              <PiPhoneCallDuotone className="contact-icon" />
-              <span>{member.contact}</span>
+          {member.instagram ? (
+            <a href={`https://www.instagram.com/${member.instagram}/`} target="_blank" rel="noopener noreferrer" className="contact-link">
+              <PiInstagramLogoDuotone className="contact-icon" />
+              <span>@{member.instagram}</span>
             </a>
           ) : (
             <span className="contact-link inactive">
-              <PiEnvelopeDuotone className="contact-icon" />
+              <PiUserDuotone className="contact-icon" />
               <span>Collaborator</span>
             </span>
           )}
