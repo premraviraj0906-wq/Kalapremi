@@ -1,0 +1,23 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://kalapremiproductions.com/sitemap.xml
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+
+# Block crawling of non-content assets
+User-agent: *
+Disallow: /assets/
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Host directive (used by some crawlers)
+Host: https://kalapremiproductions.com
