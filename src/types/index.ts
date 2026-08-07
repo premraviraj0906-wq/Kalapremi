@@ -15,6 +15,8 @@ export interface Film {
   director: string;
   description: string;
   youtubeId?: string;
+  startTime?: number;
+  endTime?: number;
 }
 
 export interface Service {

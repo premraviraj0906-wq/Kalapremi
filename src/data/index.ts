@@ -20,6 +20,8 @@ export const films: Film[] = [
     director: 'Karthik',
     description: 'When Palm & Paw Resonates — a haunting exploration of connection and solitude.',
     youtubeId: '5h6eJoVe7YU',
+    startTime: 768,
+    endTime: 798,
   },
   {
     id: 'yakshaikya',
@@ -30,6 +32,8 @@ export const films: Film[] = [
     director: 'Sujith Kalapremi',
     description: 'A mythological visual journey rooted in ancient stories retold with modern vision.',
     youtubeId: '2aOBSWjzr-0',
+    startTime: 410,
+    endTime: 440,
   },
   {
     id: 'stories',
@@ -40,6 +44,8 @@ export const films: Film[] = [
     director: 'Janardhan A',
     description: 'Premiering Aug 31 — A collection of human stories that define our era.',
     youtubeId: 'sJ2i1-LrIOQ',
+    startTime: 516,
+    endTime: 542,
   },
   {
     id: 'krishne',
@@ -50,6 +56,8 @@ export const films: Film[] = [
     director: 'Sujith Kalapremi',
     description: 'A Revelation & The Revolution — concept, produced and directed by Sujith Kalapremi.',
     youtubeId: 'kJdZzR2MzX4',
+    startTime: 440,
+    endTime: 470,
   },
   {
     id: 'life',
@@ -60,6 +68,8 @@ export const films: Film[] = [
     director: 'Sujith Kalapremi',
     description: 'Live. Inspire. Feel. Embrace. — a meditation on the art of living fully.',
     youtubeId: 'LSeMkXQtcQ8',
+    startTime: 199,
+    endTime: 232,
   },
 ];
 
