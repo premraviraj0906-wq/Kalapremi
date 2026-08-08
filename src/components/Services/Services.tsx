@@ -4,7 +4,6 @@ import { useInView } from '../../hooks';
 import './Services.css';
 import { 
   PiVideoCameraDuotone,
-  PiCameraDuotone,
   PiScissorsDuotone, 
   PiPenNibDuotone, 
   PiPaintBrushDuotone,
