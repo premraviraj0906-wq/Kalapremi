@@ -14,6 +14,7 @@ export interface Film {
   genre: string;
   director: string;
   description: string;
+  synopsis?: string;
   youtubeId?: string;
   startTime?: number;
   endTime?: number;

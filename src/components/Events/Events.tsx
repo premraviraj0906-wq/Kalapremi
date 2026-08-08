@@ -40,26 +40,26 @@ const Events: React.FC = () => {
     {
       num: '01',
       icon: <PiFilmStripDuotone className="hl-icon" />,
-      title: 'Anthology Premiere',
-      desc: 'Exclusive red-carpet premiere of 5 original Kalapremi short films.',
+      title: 'Film Screenings & Premieres',
+      desc: 'Projection of multiple short films and the exclusive premiere of upcoming Kalapremi productions.',
     },
     {
       num: '02',
       icon: <PiPaintBrushDuotone className="hl-icon" />,
-      title: 'Stipple & Canvas Exhibit',
-      desc: 'Live stipple art creation and gallery walk of commission artworks.',
+      title: 'Merchandise & Commissioned Art',
+      desc: 'Exhibiting Kalapremi merchandise and specially commissioned original artworks by our artists.',
     },
     {
       num: '03',
       icon: <PiSparkleDuotone className="hl-icon" />,
-      title: 'Classical & Modern Dance',
-      desc: 'Live performance blending Kathak & contemporary dance storytelling.',
+      title: 'Connect with Artists',
+      desc: 'A rare opportunity to meet and connect with passionate artists working across their crafts.',
     },
     {
       num: '04',
       icon: <PiUserCircleGearDuotone className="hl-icon" />,
-      title: 'Creators Gathering',
-      desc: 'Connecting independent filmmakers, actors, sound designers & artists.',
+      title: 'Panel Discussion',
+      desc: 'Where stories are discussed, celebrated, and reimagined — a candid conversation between creators.',
     },
   ];
 
@@ -164,22 +164,23 @@ const Events: React.FC = () => {
 
         {/* ── GALA EXPERIENCE HIGHLIGHTS BENTO GRID ── */}
         <div className={`gala-bento-section ${inView ? 'visible' : ''}`}>
-          <h3 className="bento-section-title">What to Expect at Shante Ishta</h3>
+          <h3 className="bento-section-title">The Heartbeat of Shante Ishta</h3>
 
           <div className="gala-bento-grid">
             {highlights.map((item, idx) => (
               <div
                 key={item.num}
                 className="gala-bento-card"
-                style={{ transitionDelay: `${idx * 0.12}s` }}
+                style={{ transitionDelay: `${idx * 0.1}s` }}
               >
-                <div className="bento-card-header">
-                  <span className="bento-card-num">{item.num}</span>
+                <div className="bento-card-icon-wrap">
                   {item.icon}
                 </div>
-                <h4 className="bento-card-title">{item.title}</h4>
-                <p className="bento-card-desc">{item.desc}</p>
-                <div className="bento-hover-glow" />
+                <div className="bento-card-body">
+                  <span className="bento-card-num">{item.num}</span>
+                  <h4 className="bento-card-title">{item.title}</h4>
+                  <p className="bento-card-desc">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>

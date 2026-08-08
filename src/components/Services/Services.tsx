@@ -11,16 +11,18 @@ import {
   PiFilmStripDuotone,
   PiBookOpenDuotone,
   PiInstagramLogoDuotone,
+  PiMaskHappyDuotone,
 } from 'react-icons/pi';
 
 // Map service IDs to cinematic react-icons
 const serviceIcons: Record<string, React.ReactNode> = {
-  'cinematography': <PiVideoCameraDuotone className="svc-cine-icon" />,
-  'photography': <PiCameraDuotone className="svc-cine-icon" />,
-  'video-editing': <PiScissorsDuotone className="svc-cine-icon" />,
-  'traditional-art': <PiPaintBrushDuotone className="svc-cine-icon" />,
-  'stipple-art': <PiPenNibDuotone className="svc-cine-icon" />,
-  'screenwriting': <PiBookOpenDuotone className="svc-cine-icon" />,
+  'sujith': <PiPenNibDuotone className="svc-cine-icon" />,
+  'karthik': <PiVideoCameraDuotone className="svc-cine-icon" />,
+  'vidya': <PiMaskHappyDuotone className="svc-cine-icon" />,
+  'deepika': <PiScissorsDuotone className="svc-cine-icon" />,
+  'janardhan': <PiBookOpenDuotone className="svc-cine-icon" />,
+  'harish': <PiPaintBrushDuotone className="svc-cine-icon" />,
+  'kishan': <PiFilmStripDuotone className="svc-cine-icon" />,
 };
 
 const Services: React.FC = () => {

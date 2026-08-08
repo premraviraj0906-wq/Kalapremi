@@ -817,21 +817,28 @@
   margin-bottom: 2rem;
 }
 
-.body-heading {
+.modal-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #FF0000;
+  color: #ffffff;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.25em;
-  color: rgba(255, 255, 255, 0.4);
-  display: block;
-  margin-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 1.6rem;
+  border-radius: 4px;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 16px rgba(255, 0, 0, 0.3);
 }
 
-.body-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.92rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 300;
+.modal-yt-btn:hover {
+  background: #cc0000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 0, 0, 0.45);
 }
 
 .detail-modal-footer {

@@ -153,8 +153,8 @@
 .film-strip-container {
   width: 100%;
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.1s, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.1s;
 }
 
 .film-strip-container.visible {
@@ -163,9 +163,10 @@
 }
 
 .film-strip-track {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
 }
 
 /* ── Individual Film Frame ── */
@@ -177,29 +178,40 @@
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  width: calc(33.333% - 1.34rem);
+  min-width: 320px;
+  max-width: 380px;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
   overflow: hidden;
-  animation: frameFadeIn 0.8s ease backwards;
+  animation: frameFadeIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+  will-change: transform, opacity;
 }
 
 @keyframes frameFadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
 .film-frame.focused {
-  transform: scale(1.05);
+  transform: translateY(-6px);
   z-index: 10;
-  border-color: rgba(240, 192, 64, 0.4);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 40px rgba(240, 192, 64, 0.1);
+  border-color: rgba(240, 192, 64, 0.3);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(240, 192, 64, 0.08);
 }
 
 @media (hover: hover) {
   .film-frame.dimmed {
-    opacity: 0.4;
-    transform: scale(0.95);
-    filter: grayscale(80%) blur(2px);
+    opacity: 0.5;
   }
 }
 
@@ -390,16 +402,17 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 992px) {
-  .film-strip-track {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1024px) {
+  .film-frame {
+    width: calc(50% - 1rem);
   }
 }
 
 @media (max-width: 768px) {
   .services-cinematic { padding: 4rem 1rem; }
   .cine-header { margin-bottom: 3rem; }
-  .film-strip-track { grid-template-columns: 1fr; gap: 1.5rem; }
+  .film-strip-track { gap: 1.5rem; }
+  .film-frame { width: 100%; max-width: 100%; }
   .cine-bg-text { font-size: 10rem; bottom: -1rem; }
   .slate-title { font-size: 3rem; }
 }

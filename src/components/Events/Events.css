@@ -97,7 +97,7 @@
 }
 
 .gala-kannada-subtitle {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Anek Kannada', sans-serif;
   font-size: 1.2rem;
   color: rgba(240, 192, 64, 0.8);
   margin-bottom: 1.5rem;
@@ -365,7 +365,7 @@
 }
 
 /* ──────────────────────────────────
-   GALA EXPERIENCE BENTO GRID
+   GALA EXPERIENCE HIGHLIGHT CARDS
    ────────────────────────────────── */
 .gala-bento-section {
   opacity: 0;
@@ -384,74 +384,116 @@
   font-weight: 400;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
+  letter-spacing: 0.02em;
+}
+
+.bento-section-title em {
+  font-style: italic;
+  color: #F0C040;
 }
 
 .gala-bento-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem 2.5rem;
 }
 
 .gala-bento-card {
   position: relative;
-  background: rgba(12, 9, 6, 0.8);
-  border: 1px solid rgba(240, 192, 64, 0.15);
-  border-radius: 8px;
-  padding: 2rem 1.6rem;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.35s ease;
+  align-items: flex-start;
+  gap: 1.4rem;
+  padding: 1.8rem 2rem;
+  background: transparent;
+  border-left: 2px solid rgba(240, 192, 64, 0.25);
+  border-radius: 0;
+  transition: border-color 0.3s ease, background 0.3s ease;
   overflow: hidden;
 }
 
+.gala-bento-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(240, 192, 64, 0.04) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
 .gala-bento-card:hover {
-  border-color: rgba(240, 192, 64, 0.5);
-  transform: translateY(-6px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(240, 192, 64, 0.15);
+  border-color: rgba(240, 192, 64, 0.7);
+  background: rgba(240, 192, 64, 0.03);
 }
 
-.bento-card-header {
+.gala-bento-card:hover::before {
+  opacity: 1;
+}
+
+.bento-card-icon-wrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  justify-content: center;
+  background: rgba(240, 192, 64, 0.08);
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  border-radius: 8px;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.bento-card-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: rgba(240, 192, 64, 0.7);
+.gala-bento-card:hover .bento-card-icon-wrap {
+  background: rgba(240, 192, 64, 0.15);
+  border-color: rgba(240, 192, 64, 0.5);
 }
 
 .hl-icon {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #F0C040;
+}
+
+.bento-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.bento-card-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: rgba(240, 192, 64, 0.5);
+  display: block;
+  margin-bottom: 0.4rem;
 }
 
 .bento-card-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #ffffff;
-  margin: 0 0 0.8rem;
+  margin: 0 0 0.5rem;
   line-height: 1.25;
+  transition: color 0.3s ease;
+}
+
+.gala-bento-card:hover .bento-card-title {
+  color: #F0C040;
 }
 
 .bento-card-desc {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.85rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.55);
   font-weight: 300;
   margin: 0;
 }
 
 /* ── RESPONSIVE DESIGN ── */
 @media (max-width: 1024px) {
-  .gala-bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .gala-bento-grid { grid-template-columns: 1fr; gap: 0.8rem; }
 }
 
 @media (max-width: 768px) {
@@ -461,6 +503,7 @@
   .tc-val { font-size: 2rem; }
   .ticket-card-footer { flex-direction: column; align-items: flex-start; }
   .gala-bento-grid { grid-template-columns: 1fr; }
+  .gala-bento-card { padding: 1.4rem 1.2rem; }
 }
 
 @media (max-width: 600px) {

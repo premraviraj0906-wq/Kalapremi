@@ -249,21 +249,21 @@ const About: React.FC = () => {
   const pillars = [
     {
       num: '01', title: 'THE ORIGIN',
-      headline: 'A community for artists built-by artists',
+      headline: 'A passion project by filmmakers, for filmmakers',
       icon: <PiFilmReelDuotone />,
-      description: 'Kalapremi Productions was born out of necessity when independent artists faced limited avenues to showcase original work. What started as a home for our own short films has evolved into a thriving platform standing alongside independent creators across mediums.',
+      description: 'Born from the passion of individual creators craving a space dedicated to the art of filmmaking. What started as a heartfelt endeavor is now a vibrant platform uniting artists.',
     },
     {
       num: '02', title: 'THE SPECTRUM',
       headline: 'Multidisciplinary Creative House',
       icon: <PiMaskHappyDuotone />,
-      description: 'We bridge the boundaries between Cinema, Kathak & Contemporary Dance, Visual Stipple Canvas, and Fine Photography — uniting distinct artistic disciplines into a single harmonious platform.',
+      description: 'We bridge the boundaries between Theatre, Dance, Visual Art, Cinematography, Screen writing, Acting, Visual design, Traditional art, Direction and more.',
     },
     {
       num: '03', title: 'THE PHILOSOPHY',
-      headline: 'Feeling Before Analyzing',
+      headline: 'Where passion meets purpose',
       icon: <PiProjectorScreenDuotone />,
-      description: 'At our core, we believe in authentic human storytelling, growing together as a collective, and crafting narrative experiences without judgment — making art that resonates deeply.',
+      description: 'Art flourishes when creativity is free. We encourage fearless expression, embrace fresh perspectives and believe every creator deserves the opportunity to tell their story.',
     },
   ];
 
