@@ -53,7 +53,7 @@ export const films: Film[] = [
   {
     id: 'krishne',
     title: 'KRISHNE',
-    poster: '/images/krishne.jpg',
+    poster: '/images/krishne.jpeg',
     year: '2024',
     genre: 'Drama',
     director: 'Sujith Kalapremi',
