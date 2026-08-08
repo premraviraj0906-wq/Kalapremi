@@ -138,19 +138,28 @@
 }
 
 .poster-img {
+  --base-scale: 1;
+  --hover-scale: 1.05;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
   filter: grayscale(1) brightness(0.6) contrast(1.2);
-  transform: scale(1);
+  transform: scale(var(--base-scale));
   transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .character-poster:hover .poster-img {
   filter: grayscale(0) brightness(1) contrast(1.05);
-  transform: scale(1.05);
+  transform: scale(var(--hover-scale));
 }
+
+.img-vidya {
+  --base-scale: 1.3;
+  --hover-scale: 1.35;
+  object-position: center 30%;
+}
+
 
 /* Cinematic Vignette */
 .poster-vignette {

@@ -20,7 +20,7 @@ const CharacterPoster: React.FC<{
         <img
           src={member.image}
           alt={member.name}
-          className="poster-img"
+          className={`poster-img img-${member.id}`}
           loading="lazy"
         />
         <div className="poster-vignette" />

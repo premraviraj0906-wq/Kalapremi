@@ -214,13 +214,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: 65% center;
+  transform: scale(1.05);
   filter: brightness(0.5) saturate(0.9);
   transition: transform 0.6s ease, filter 0.6s ease;
 }
 
 .centered-banner-container:hover .feature-centered-banner {
-  transform: scale(1.03);
+  transform: scale(1.07);
   filter: brightness(0.65) saturate(1);
 }
 
