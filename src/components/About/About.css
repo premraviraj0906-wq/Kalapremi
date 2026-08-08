@@ -10,61 +10,7 @@
   overflow: hidden;
 }
 
-/* ── Dancer canvas wrapper ── */
-.dancer-canvas-wrap {
-  position: absolute;
-  top: 4rem;
-  left: 3%;
-  z-index: 1;
-  pointer-events: none;
-  /* Subtle glow behind dancer */
-  filter: drop-shadow(0 0 30px rgba(240, 192, 64, 0.08));
-}
 
-.dancer-stipple-canvas {
-  display: block;
-  opacity: 0.85;
-}
-
-/* On tablet/mobile the canvas becomes a faint background watermark */
-@media (max-width: 1024px) {
-  .dancer-canvas-wrap {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0.22;
-  }
-}
-
-/* On phones — big, bright, clipped to left half */
-@media (max-width: 768px) {
-  .dancer-canvas-wrap {
-    top: 0;
-    left: 0;
-    transform: none;
-    width: 58vw;
-    overflow: hidden;
-    opacity: 0.85;
-    filter:
-      drop-shadow(0 0 12px rgba(240, 192, 64, 0.45))
-      drop-shadow(0 0 30px rgba(240, 192, 64, 0.25));
-  }
-  .dancer-stipple-canvas {
-    display: block;
-    position: relative;
-    left: -15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .dancer-canvas-wrap {
-    opacity: 0.75;
-    width: 60vw;
-    filter:
-      drop-shadow(0 0 10px rgba(240, 192, 64, 0.45))
-      drop-shadow(0 0 25px rgba(240, 192, 64, 0.25));
-  }
-}
 
 /* ── Container Layout ── */
 .minimal-container {

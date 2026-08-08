@@ -21,8 +21,8 @@ export const films: Film[] = [
     description: 'A wordless conversation between a hand and a paw that says everything.',
     synopsis: 'Donka? is a quiet, aching film about the loneliness we carry and the unexpected company that eases it. A stray dog and a solitary human share a single frame, a single night, and a single question — do you understand me? No dialogue, no explanation. Just two beings reaching across the silence, finding that sometimes all it takes to feel less alone is someone willing to stay. Shot with raw intimacy, this film asks whether connection is really as complicated as we make it.',
     youtubeId: '5h6eJoVe7YU',
-    startTime: 768,
-    endTime: 798,
+    startTime: 714,
+    endTime: 744,
   },
   {
     id: 'yakshaikya',
@@ -34,8 +34,8 @@ export const films: Film[] = [
     description: 'Ancient gods, modern eyes — mythology the way it was always meant to feel.',
     synopsis: 'Yakshaikya doesn\'t retell mythology — it resurrects it. Drawing from the deep roots of Yakshagana and classical Indian tradition, Sujith Kalapremi weaves a visual world where the old stories breathe again, urgent and alive. The gods here are not distant or ornamental; they are forces felt in the body, in the earth, in the drumbeat. This is a film about what we lose when we stop listening to the stories our ancestors left us, and what we rediscover when we dare to look again.',
     youtubeId: '2aOBSWjzr-0',
-    startTime: 410,
-    endTime: 440,
+    startTime: 436,
+    endTime: 466,
   },
   {
     id: 'stories',
@@ -44,11 +44,11 @@ export const films: Film[] = [
     year: '2024',
     genre: 'Horror Comedy',
     director: 'Janardhan A',
-    description: 'Seven strangers. Seven truths. One city holding all of it together.',
+    description: 'Four friends, three ways, two stories, one payback.',
     synopsis: 'Stories is an anthology that trusts the ordinary. Each chapter follows a different person navigating a version of Bangalore you might recognise — a bus ride that changes everything, a conversation that ends before it begins, a silence that speaks louder than words. Janardhan A assembles these fragments not as separate films but as a single tapestry of the human condition in contemporary India. There\'s no hero, no villain, just people — flawed, tender, and startlingly real.',
     youtubeId: 'sJ2i1-LrIOQ',
-    startTime: 516,
-    endTime: 542,
+    startTime: 366,
+    endTime: 396,
   },
   {
     id: 'krishne',
@@ -60,8 +60,8 @@ export const films: Film[] = [
     description: 'Some revelations don\'t arrive gently. Some arrive like a revolution.',
     synopsis: 'Krishne is a film about the moment a person changes — not gradually, not comfortably, but all at once. Sujith Kalapremi builds the world around a single character whose quiet life is cracked open by a truth they cannot unfind. Part drama, part meditation, Krishne sits with discomfort and refuses to offer easy resolution. What does it mean to see something clearly for the first time? What do you owe yourself when you do? The film doesn\'t answer. It just holds the question with both hands.',
     youtubeId: 'kJdZzR2MzX4',
-    startTime: 440,
-    endTime: 470,
+    startTime: 105,
+    endTime: 135,
   },
   {
     id: 'life',
@@ -73,8 +73,8 @@ export const films: Film[] = [
     description: 'Not a film about life. A film that asks if you\'re actually living yours.',
     synopsis: 'Life is a provocation wrapped in stillness. Sujith Kalapremi strips away narrative and structure to leave something closer to an experience — four movements, four invitations: to live, to inspire, to feel, to embrace. The film resists being summarised because it is not a story you watch; it is a mirror you look into. Shot with meditative patience and sparse, burning visuals, Life doesn\'t tell you what to do. It just reminds you, quietly but firmly, that you are here. That this moment is the one you have. And that is everything.',
     youtubeId: 'LSeMkXQtcQ8',
-    startTime: 199,
-    endTime: 232,
+    startTime: 103,
+    endTime: 133,
   },
 ];
 
