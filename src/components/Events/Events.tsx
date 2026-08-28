@@ -5,31 +5,7 @@ import './Events.css';
 
 const EVENT_DATE = new Date('2026-08-22T17:00:00+05:30');
 
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
 
-function useEventCountdown(): TimeLeft {
-  const calc = (): TimeLeft => {
-    const diff = EVENT_DATE.getTime() - Date.now();
-    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    return {
-      days: Math.floor(diff / 86400000),
-      hours: Math.floor((diff / 3600000) % 24),
-      minutes: Math.floor((diff / 60000) % 60),
-      seconds: Math.floor((diff / 1000) % 60),
-    };
-  };
-  const [t, setT] = useState<TimeLeft>(calc);
-  useEffect(() => {
-    const id = setInterval(() => setT(calc()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  return t;
-}
 
 // Custom 60fps Canvas Confetti Particle System
 const ConfettiCanvas: React.FC<{ active: boolean }> = ({ active }) => {
@@ -134,9 +110,6 @@ const ConfettiCanvas: React.FC<{ active: boolean }> = ({ active }) => {
 
 const Events: React.FC = () => {
   const { ref: sectionRef, inView } = useInView(0.1);
-  const timeLeft = useEventCountdown();
-  const pad = (n: number) => String(n).padStart(2, '0');
-
   // Real-time Event Lifecycles
   const [currentTime, setCurrentTime] = useState(Date.now());
   const [triggerConfetti, setTriggerConfetti] = useState(false);
@@ -279,28 +252,22 @@ const Events: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="ticket-countdown-block">
-                <span className="tc-title">COUNTDOWN TO THE GALA</span>
-                <div className="tc-grid">
-                  <div className="tc-unit">
-                    <span className="tc-val">{pad(timeLeft.days)}</span>
-                    <span className="tc-lbl">DAYS</span>
+              <div className="ticket-countdown-block artistic-mode">
+                <div className="heart-eye-visualizer-container">
+                  <div className="eye-outer-ring" />
+                  <div className="eye-inner-ring" />
+                  <div className="eye-pupil-glow">✦</div>
+                  <div className="eye-sparkles">
+                    <span className="s1">✦</span>
+                    <span className="s2">✦</span>
+                    <span className="s3">✦</span>
                   </div>
-                  <span className="tc-sep">:</span>
-                  <div className="tc-unit">
-                    <span className="tc-val">{pad(timeLeft.hours)}</span>
-                    <span className="tc-lbl">HOURS</span>
-                  </div>
-                  <span className="tc-sep">:</span>
-                  <div className="tc-unit">
-                    <span className="tc-val">{pad(timeLeft.minutes)}</span>
-                    <span className="tc-lbl">MINUTES</span>
-                  </div>
-                  <span className="tc-sep">:</span>
-                  <div className="tc-unit">
-                    <span className="tc-val">{pad(timeLeft.seconds)}</span>
-                    <span className="tc-lbl">SECONDS</span>
-                  </div>
+                </div>
+                
+                <div className="live-showcase-title">
+                  <h3>AWAITING THE VISION</h3>
+                  <p className="kannada-eye-phrase">ಶಂತೆ ಇಷ್ಟ &nbsp;·&nbsp; <em>Single Eye of the Heart</em></p>
+                  <p className="commenced-desc">The preparation for Kalapremi's flagship gathering is in motion. Keep this pass close; the vision is yet to unfold.</p>
                 </div>
               </div>
             )}
