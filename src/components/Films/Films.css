@@ -225,6 +225,12 @@
   filter: brightness(0.65) saturate(1);
 }
 
+/* news.jpg is a tall portrait: center crop so face/subject stays in frame */
+.feature-centered-banner[src="/images/news.jpg"] {
+  object-position: center 15%;
+}
+
+
 .feature-bg-img {
   width: 100%;
   height: 100%;
@@ -553,6 +559,12 @@
   filter: brightness(0.65) saturate(0.85);
   transition: transform 0.4s ease, filter 0.4s ease;
 }
+
+/* news.jpg is a centered portrait — override top crop */
+.film-card-poster-frame img[src="/images/news.jpg"] {
+  object-position: center 20%;
+}
+
 
 .card-gradient-overlay {
   position: absolute;

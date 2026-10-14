@@ -12,6 +12,19 @@ export const navLinks: NavLink[] = [
 
 export const films: Film[] = [
   {
+    id: 'news',
+    title: 'NEWS',
+    poster: '/images/news.jpg',
+    year: '2026',
+    genre: 'Drama',
+    director: 'Kishan C J',
+    description: 'A story unfolding in real time — where truth and perception collide.',
+    synopsis: 'News is a cinematic exploration of the stories we choose to tell, and those we bury. Set against the relentless churn of modern media, it questions what is real, what is shaped, and what we lose when the narrative is controlled. A film that lingers long after the screen goes dark.',
+    youtubeId: 'qqVt3pU4b6g',
+    startTime: 120,
+    endTime: 150,
+  },
+  {
     id: 'donka',
     title: 'DONKA?',
     poster: '/images/donka.jpg',
